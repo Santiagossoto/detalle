@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Para ti 🌷</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Dancing+Script:wght@400;600&display=swap');
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      min-height: 100vh;
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    /* Animated background particles */
+    .particles {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .particle {
+      position: absolute;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 50%;
+      animation: floatParticle 20s linear infinite;
+    }
+
+    @keyframes floatParticle {
+      0% { 
+        transform: translateY(100vh) translateX(0) rotate(0deg); 
+        opacity: 0; 
+      }
+      10% { opacity: 1; }
+      90% { opacity: 1; }
+      100% { 
+        transform: translateY(-100px) translateX(100px) rotate(360deg); 
+        opacity: 0; 
+      }
+    }
+
+    /* Intro Screen */
+    .intro-screen {
+      position: fixed;
+      inset: 0;
+      background: linear-gradient(45deg, #ff6b6b, #4ecdc4, #45b7d1, #96ceb4);
+      background-size: 400% 400%;
+      animation: gradientShift 4s ease infinite;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+      transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+
+    @keyframes gradientShift {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    .intro-screen.hidden {
+      opacity: 0;
+      visibility: hidden;
+      transform: scale(0.8) rotateY(90deg);
+    }
+
+    .intro-text {
+      font-family: 'Dancing Script', cursive;
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      font-weight: 600;
+      color: white;
+      text-align: center;
+      margin-bottom: 2rem;
+      opacity: 0;
+      animation: bounceIn 1.2s ease-out 0.5s forwards;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+    }
+
+    .intro-button {
+      background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+      border: none;
+      color: white;
+      padding: 18px 40px;
+      border-radius: 50px;
+      font-size: 1.2rem;
+      font-weight: 600;
+      cursor: pointer;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+      transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      opacity: 0;
+      animation: bounceIn 1.2s ease-out 1.2s forwards;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .intro-button::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+      transition: left 0.5s;
+    }
+
+    .intro-button:hover::before {
+      left: 100%;
+    }
+
+    .intro-button:hover {
+      transform: scale(1.08) translateY(-2px);
+      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+    }
+
+    @keyframes bounceIn {
+      0% { opacity: 0; transform: scale(0.3) translateY(50px); }
+      60% { opacity: 1; transform: scale(1.05) translateY(-10px); }
+      80% { transform: scale(0.95) translateY(5px); }
+      100% { opacity: 1; transform: scale(1) translateY(0); }
+    }
+
+    /* Main Content */
+    .main-content {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 2rem;
+      position: relative;
+      z-index: 10;
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+
+    .main-content.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .photo-container {
+      position: relative;
+      margin-bottom: 3rem;
+    }
+
+    .photo-frame {
+      width: 280px;
+      height: 280px;
+      border-radius: 50%;
+      background: linear-gradient(145deg, #ffffff, #f0f0f0);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border: 8px solid white;
+      box-shadow: 
+        0 20px 40px rgba(0, 0, 0, 0.1),
+        0 0 0 4px rgba(255, 255, 255, 0.1);
+      animation: floatPhoto 6s ease-in-out infinite;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .photo-frame::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: conic-gradient(
+        from 45deg,
+        transparent,
+        rgba(255, 107, 107, 0.1),
+        rgba(78, 205, 196, 0.1),
+        rgba(69, 183, 209, 0.1),
+        transparent
+      );
+      animation: rotate 3s linear infinite;
+      z-index: -1;
+    }
+
+    @keyframes rotate {
+      100% { transform: rotate(360deg); }
+    }
+
+    .photo-frame img {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      object-fit: cover;
+      transition: transform 0.3s ease;
+    }
+
+    .photo-frame:hover img {
+      transform: scale(1.05);
+    }
+
+    @keyframes floatPhoto {
+      0%, 100% { transform: translateY(0) rotate(0deg); }
+      25% { transform: translateY(-15px) rotate(1deg); }
+      50% { transform: translateY(-5px) rotate(0deg); }
+      75% { transform: translateY(-10px) rotate(-1deg); }
+    }
+
+    /* Sparkles around photo */
+    .sparkle {
+      position: absolute;
+      color: #ffd700;
+      font-size: 20px;
+      animation: sparkle 2s ease-in-out infinite;
+    }
+
+    .sparkle:nth-child(1) { top: 10%; left: 20%; animation-delay: 0s; }
+    .sparkle:nth-child(2) { top: 20%; right: 15%; animation-delay: 0.5s; }
+    .sparkle:nth-child(3) { bottom: 15%; left: 15%; animation-delay: 1s; }
+    .sparkle:nth-child(4) { bottom: 10%; right: 20%; animation-delay: 1.5s; }
+
+    @keyframes sparkle {
+      0%, 100% { opacity: 0; transform: scale(0) rotate(0deg); }
+      50% { opacity: 1; transform: scale(1) rotate(180deg); }
+    }
+
+    .message-container {
+      max-width: 650px;
+      text-align: center;
+      background: rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(10px);
+      border-radius: 20px;
+      padding: 2.5rem;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    }
+
+    .main-message,
+    .sub-message {
+      opacity: 0;
+      transition: opacity 1s ease-in-out;
+    }
+
+    .main-message {
+      font-size: clamp(1.3rem, 3vw, 1.8rem);
+      color: white;
+      margin-bottom: 1.5rem;
+      font-weight: 400;
+      line-height: 1.6;
+      text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+    }
+
+    .sub-message {
+      font-size: clamp(1rem, 2.5vw, 1.2rem);
+      color: rgba(255, 255, 255, 0.9);
+      font-style: italic;
+      font-weight: 300;
+    }
+
+    .typewriter {
+      border-right: 3px solid #4ecdc4;
+      white-space: nowrap;
+      overflow: hidden;
+      animation: blink 1s step-start infinite;
+    }
+
+    @keyframes blink {
+      50% { border-color: transparent; }
+    }
+
+    /* Fun emoji animations */
+    .emoji-rain {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 5;
+    }
+
+    .emoji {
+      position: absolute;
+      font-size: 25px;
+      animation: emojifall 4s linear infinite;
+    }
+
+    @keyframes emojifall {
+      0% { 
+        transform: translateY(-100px) rotate(0deg); 
+        opacity: 0; 
+      }
+      10% { opacity: 1; }
+      90% { opacity: 1; }
+      100% { 
+        transform: translateY(100vh) rotate(360deg); 
+        opacity: 0; 
+      }
+    }
+
+    @media (max-width: 600px) {
+      .photo-frame {
+        width: 220px;
+        height: 220px;
+      }
+      
+      .message-container {
+        padding: 2rem;
+        margin: 0 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="particles"></div>
+  <div class="emoji-rain"></div>
+
+  <div class="intro-screen" id="introScreen">
+    <div class="intro-text">¿Y si te regalo algo diferente?</div>
+    <button class="intro-button" onclick="showMainContent()">
+      Descúbrelo ✨
+    </button>
+  </div>
+
+  <div class="main-content" id="mainContent">
+    <div class="photo-container">
+      <div class="photo-frame">
+        <img src="flores.png" alt="Flor para ti">
+        <div class="sparkle">✨</div>
+        <div class="sparkle">⭐</div>
+        <div class="sparkle">💫</div>
+        <div class="sparkle">✨</div>
+      </div>
+    </div>
+    
+    <div class="message-container">
+      <div class="main-message" id="mainMessage"></div>
+      <div class="sub-message" id="subMessage"></div>
+    </div>
+  </div>
+
+  <script>
+    // Create floating particles
+    function createParticle() {
+      const particle = document.createElement('div');
+      particle.className = 'particle';
+      particle.style.left = Math.random() * 100 + '%';
+      particle.style.width = particle.style.height = (Math.random() * 6 + 2) + 'px';
+      particle.style.animationDuration = (Math.random() * 15 + 10) + 's';
+      particle.style.animationDelay = Math.random() * 2 + 's';
+      document.querySelector('.particles').appendChild(particle);
+      setTimeout(() => particle.remove(), 25000);
+    }
+
+    // Create emoji rain
+    function createEmoji() {
+      const emojis = ['🌸', '🌺', '🌻', '🦋', '✨', '💖', '🌈', '🎈'];
+      const emoji = document.createElement('div');
+      emoji.className = 'emoji';
+      emoji.innerHTML = emojis[Math.floor(Math.random() * emojis.length)];
+      emoji.style.left = Math.random() * 100 + '%';
+      emoji.style.animationDuration = (Math.random() * 2 + 3) + 's';
+      emoji.style.fontSize = (Math.random() * 15 + 20) + 'px';
+      document.querySelector('.emoji-rain').appendChild(emoji);
+      setTimeout(() => emoji.remove(), 5000);
+    }
+
+    // Start animations
+    setInterval(createParticle, 300);
+    setInterval(createEmoji, 1200);
+
+    function showMainContent() {
+      document.getElementById('introScreen').classList.add('hidden');
+      setTimeout(() => {
+        const main = document.getElementById('mainContent');
+        main.classList.add('visible');
+        startTypewriter();
+        // Start emoji rain after main content shows
+        setTimeout(() => {
+          setInterval(createEmoji, 800);
+        }, 2000);
+      }, 800);
+    }
+
+    function typeWriter(element, text, speed = 60) {
+      return new Promise(resolve => {
+        element.style.opacity = '1';
+        element.classList.add('typewriter');
+        let i = 0;
+        function type() {
+          if (i < text.length) {
+            element.innerHTML += text.charAt(i);
+            i++;
+            setTimeout(type, speed);
+          } else {
+            element.classList.remove('typewriter');
+            resolve();
+          }
+        }
+        type();
+      });
+    }
+
+    async function startTypewriter() {
+      const mainMessage = document.getElementById('mainMessage');
+      const subMessage = document.getElementById('subMessage');
+      const mainText = "Se me ocurrió regalarte algo diferente esta vez, aunque sea desde la distancia 🌸";
+      const subText = "(No tengo tu dirección para enviarte flores, pero aquí tienes estas jsjssj.)";
+      
+      await typeWriter(mainMessage, mainText, 55);
+      setTimeout(() => typeWriter(subMessage, subText, 50), 800);
+    }
+
+    // Add some extra interactive effects
+    document.addEventListener('mousemove', (e) => {
+      const cursor = document.querySelector('.photo-frame');
+      if (cursor) {
+        const rect = cursor.getBoundingClientRect();
+        const centerX = rect.left + rect.width / 2;
+        const centerY = rect.top + rect.height / 2;
+        const deltaX = (e.clientX - centerX) * 0.02;
+        const deltaY = (e.clientY - centerY) * 0.02;
+        cursor.style.transform = `translate(${deltaX}px, ${deltaY}px)`;
+      }
+    });
+  </script>
+</body>
+</html>
