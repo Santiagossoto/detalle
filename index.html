@@ -3,19 +3,15 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Para ti 💜</title>
+  <title>Para ti 💙</title>
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Quicksand:wght@300;500;600&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Quicksand:wght@400;600&display=swap');
 
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
 
     body {
       font-family: 'Quicksand', sans-serif;
-      background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+      background: linear-gradient(-45deg, #007cf0, #00dfd8, #60efff, #007cf0);
       background-size: 400% 400%;
       animation: gradientShift 15s ease infinite;
       overflow: hidden;
@@ -23,132 +19,80 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      position: relative;
+      flex-direction: column;
+      text-align: center;
+      color: #fff;
     }
 
     @keyframes gradientShift {
-      0% { background-position: 0% 50%; }
+      0%, 100% { background-position: 0% 50%; }
       50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
-    }
-
-    .stars {
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      overflow: hidden;
-    }
-
-    .star {
-      position: absolute;
-      width: 2px;
-      height: 2px;
-      background: white;
-      border-radius: 50%;
-      animation: twinkle 3s infinite;
-    }
-
-    @keyframes twinkle {
-      0%, 100% { opacity: 0; }
-      50% { opacity: 1; }
     }
 
     .container {
-      position: relative;
-      z-index: 10;
       background: rgba(255, 255, 255, 0.15);
-      backdrop-filter: blur(20px);
-      border-radius: 30px;
-      padding: 3rem 2.5rem;
-      max-width: 650px;
+      backdrop-filter: blur(18px);
+      border-radius: 25px;
+      padding: 2.5rem;
       width: 90%;
-      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1),
-                  inset 0 1px 0 rgba(255, 255, 255, 0.3);
-      border: 1px solid rgba(255, 255, 255, 0.2);
-      animation: slideIn 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+      max-width: 600px;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
+      animation: fadeIn 1.3s ease forwards;
+      position: relative;
+      z-index: 2;
     }
 
-    @keyframes slideIn {
-      from {
-        opacity: 0;
-        transform: translateY(50px) scale(0.9);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0) scale(1);
-      }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
     }
 
     h1 {
       font-family: 'Playfair Display', serif;
-      font-size: clamp(2.5rem, 6vw, 3.8rem);
-      font-weight: 700;
-      margin-bottom: 1.5rem;
-      text-align: center;
-      color: #fff;
-      text-shadow: 0 2px 20px rgba(0, 0, 0, 0.2);
-      animation: glow 2s ease-in-out infinite;
-    }
-
-    @keyframes glow {
-      0%, 100% { text-shadow: 0 2px 20px rgba(255, 255, 255, 0.3); }
-      50% { text-shadow: 0 2px 30px rgba(255, 255, 255, 0.6); }
+      font-size: clamp(2rem, 5vw, 3rem);
+      color: #e0f7ff;
+      margin-bottom: 1rem;
+      text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
     }
 
     .message {
-      text-align: center;
-      line-height: 1.8;
-      font-size: clamp(1rem, 2.2vw, 1.15rem);
-      color: #fff;
-      margin-bottom: 2rem;
-      font-weight: 500;
-      opacity: 0;
-      animation: fadeInUp 1s ease forwards 0.5s;
-    }
-
-    @keyframes fadeInUp {
-      from {
-        opacity: 0;
-        transform: translateY(20px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
+      line-height: 1.7;
+      font-size: 1.1rem;
+      margin-bottom: 1.5rem;
+      color: #e6faff;
     }
 
     .highlight {
+      color: #a7f1ff;
       font-weight: 600;
-      color: #ffe66d;
-      text-shadow: 0 0 10px rgba(255, 230, 109, 0.5);
+      text-shadow: 0 0 10px rgba(173, 255, 255, 0.6);
     }
 
     button {
-      display: block;
-      margin: 0 auto;
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-      color: white;
       border: none;
-      padding: 15px 40px;
-      border-radius: 50px;
-      font-size: 1.1rem;
-      font-weight: 600;
+      background: linear-gradient(135deg, #00aaff, #007cf0);
+      color: white;
+      padding: 14px 35px;
+      border-radius: 40px;
       cursor: pointer;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-      opacity: 0;
-      animation: fadeInUp 1s ease forwards 1s;
+      font-weight: 600;
+      font-size: 1rem;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
       position: relative;
       overflow: hidden;
+    }
+
+    button:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 25px rgba(0, 0, 0, 0.3);
     }
 
     button::before {
       content: '';
       position: absolute;
-      top: 50%;
-      left: 50%;
-      width: 0;
-      height: 0;
+      top: 50%; left: 50%;
+      width: 0; height: 0;
       border-radius: 50%;
       background: rgba(255, 255, 255, 0.3);
       transform: translate(-50%, -50%);
@@ -156,154 +100,91 @@
     }
 
     button:hover::before {
-      width: 300px;
-      height: 300px;
-    }
-
-    button:hover {
-      transform: translateY(-5px) scale(1.05);
-      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
-    }
-
-    button span {
-      position: relative;
-      z-index: 1;
+      width: 250px; height: 250px;
     }
 
     .footer-text {
-      position: fixed;
-      bottom: 8%;
-      left: 50%;
-      transform: translateX(-50%);
-      font-size: 1.1rem;
-      color: rgba(255, 255, 255, 0.95);
+      margin-top: 1.5rem;
       font-weight: 600;
-      text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+      opacity: 0.9;
+      font-size: 1.1rem;
       animation: pulse 2s ease-in-out infinite;
-      opacity: 0;
-      animation: fadeInUp 1s ease forwards 1.5s, pulse 2s ease-in-out infinite 2.5s;
     }
 
     @keyframes pulse {
-      0%, 100% { transform: translateX(-50%) scale(1); }
-      50% { transform: translateX(-50%) scale(1.05); }
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.05); }
     }
 
     .heart {
       position: absolute;
-      font-size: 25px;
+      font-size: 22px;
       animation: floatHeart 5s ease-in infinite;
       pointer-events: none;
+      color: #8feaff;
+      text-shadow: 0 0 15px rgba(173, 255, 255, 0.8);
     }
 
     @keyframes floatHeart {
-      0% {
-        transform: translateY(0) rotate(0deg) scale(0);
-        opacity: 0;
-      }
-      10% {
-        opacity: 1;
-        transform: translateY(-20vh) rotate(20deg) scale(1);
-      }
-      100% {
-        transform: translateY(-120vh) rotate(360deg) scale(0.5);
-        opacity: 0;
-      }
+      0% { transform: translateY(0) rotate(0deg) scale(0); opacity: 0; }
+      20% { opacity: 1; }
+      100% { transform: translateY(-110vh) rotate(360deg) scale(1); opacity: 0; }
     }
 
-    .particle {
-      position: absolute;
-      width: 4px;
-      height: 4px;
-      background: white;
-      border-radius: 50%;
-      pointer-events: none;
-      animation: particleFloat 4s ease-in-out infinite;
+    #surprise {
+      display: none;
+      font-size: 1.3rem;
+      color: #e6faff;
+      margin-top: 1.5rem;
+      animation: fadeText 2s ease forwards;
     }
 
-    @keyframes particleFloat {
-      0%, 100% {
-        transform: translateY(0) translateX(0);
-        opacity: 0;
-      }
-      50% {
-        opacity: 0.8;
-      }
-      100% {
-        transform: translateY(-100vh) translateX(50px);
-      }
+    @keyframes fadeText {
+      from { opacity: 0; transform: scale(0.9); }
+      to { opacity: 1; transform: scale(1); }
     }
   </style>
 </head>
 <body>
-  <div class="stars" id="stars"></div>
-  
-  <div class="container">
-    <h1>Mi amor 💖</h1>
-<div class="message">
-  <p>
-    Amor, sé que hoy no fue fácil… las cosas no salieron como querías y te sientes agotada.  
-    Solo quiero que sepas que no pasa nada por tener un día así.  
-    <span class="highlight">No siempre tenemos que poder con todo</span>.  
-    <br><br>
-    Lo importante es que sigues aquí, haciendo lo mejor que puedes, y eso ya vale muchísimo.  
-    <br><br>
-    <span class="highlight">Eres fuerte, valiosa y te mereces descansar sin culpa</span>.  
-    Cierra los ojos un momento, respira… y siente mi abrazo, aunque sea desde lejos 💙
-  </p>
-</div>
 
-    <button onclick="activateLove()">
-      <span>Necesito un poco de amor 💫</span>
+  <div class="container">
+    <h1>Mi amor 💙</h1>
+    <div class="message">
+      Sé que hoy fue difícil, mi vida…  
+      pero incluso en los días grises sigues brillando.  
+      <br><br>
+      <span class="highlight">Eres la calma en mi caos, mi razón de sonrisa</span>.  
+      <br><br>
+      Respira, descansa, y deja que este momento sea solo para ti 💫
+    </div>
+
+    <button onclick="showSurprise()">
+      <span>💙 Quiero un abrazo tuyo 💙</span>
     </button>
+
+    <div id="surprise">💙 Imagínate rodeada de mis abrazos… te quiero más de lo que crees 💙</div>
   </div>
 
-  <div class="footer-text">Todo va a mejorar, mi vida 💜</div>
+  <div class="footer-text">Eres mi paz en cualquier tormenta 💙</div>
 
   <script>
-    const emojis = ['💜', '💖', '💫', '🌸', '✨', '💝', '🌟', '💗', '🦋', '🌺'];
-    
-    for (let i = 0; i < 50; i++) {
-      const star = document.createElement('div');
-      star.className = 'star';
-      star.style.left = Math.random() * 100 + '%';
-      star.style.top = Math.random() * 100 + '%';
-      star.style.animationDelay = Math.random() * 3 + 's';
-      document.getElementById('stars').appendChild(star);
-    }
-
-    function createParticle() {
-      const particle = document.createElement('div');
-      particle.className = 'particle';
-      particle.style.left = Math.random() * 100 + '%';
-      particle.style.animationDelay = Math.random() * 2 + 's';
-      particle.style.animationDuration = (Math.random() * 3 + 2) + 's';
-      document.body.appendChild(particle);
-      setTimeout(() => particle.remove(), 5000);
-    }
-
-    setInterval(createParticle, 300);
-
     function createHeart() {
       const heart = document.createElement('div');
       heart.className = 'heart';
-      heart.innerHTML = emojis[Math.floor(Math.random() * emojis.length)];
+      heart.innerHTML = '💙';
       heart.style.left = Math.random() * 100 + '%';
       heart.style.fontSize = (Math.random() * 20 + 20) + 'px';
-      heart.style.animationDuration = (Math.random() * 2 + 4) + 's';
-      heart.style.animationDelay = Math.random() * 0.5 + 's';
+      heart.style.animationDuration = (Math.random() * 3 + 4) + 's';
       document.body.appendChild(heart);
       setTimeout(() => heart.remove(), 6000);
     }
 
-    let loveActivated = false;
-
-    function activateLove() {
-      if (!loveActivated) {
-        loveActivated = true;
-        setInterval(createHeart, 250);
-        for (let i = 0; i < 15; i++) {
-          setTimeout(createHeart, i * 100);
+    function showSurprise() {
+      const surprise = document.getElementById('surprise');
+      if (surprise.style.display === 'none') {
+        surprise.style.display = 'block';
+        for (let i = 0; i < 25; i++) {
+          setTimeout(createHeart, i * 200);
         }
       }
     }
