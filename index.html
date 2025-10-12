@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Para ti 💜</title>
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&family=Dancing+Script:wght@600&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Quicksand:wght@300;500;600&display=swap');
 
     * {
       margin: 0;
@@ -14,125 +14,299 @@
     }
 
     body {
-      font-family: 'Poppins', sans-serif;
-      background: linear-gradient(135deg, #a18cd1 0%, #fbc2eb 100%);
+      font-family: 'Quicksand', sans-serif;
+      background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+      background-size: 400% 400%;
+      animation: gradientShift 15s ease infinite;
       overflow: hidden;
       height: 100vh;
       display: flex;
       justify-content: center;
       align-items: center;
-      flex-direction: column;
-      color: white;
+      position: relative;
+    }
+
+    @keyframes gradientShift {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    .stars {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+    }
+
+    .star {
+      position: absolute;
+      width: 2px;
+      height: 2px;
+      background: white;
+      border-radius: 50%;
+      animation: twinkle 3s infinite;
+    }
+
+    @keyframes twinkle {
+      0%, 100% { opacity: 0; }
+      50% { opacity: 1; }
+    }
+
+    .container {
+      position: relative;
+      z-index: 10;
+      background: rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(20px);
+      border-radius: 30px;
+      padding: 3rem 2.5rem;
+      max-width: 650px;
+      width: 90%;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1),
+                  inset 0 1px 0 rgba(255, 255, 255, 0.3);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      animation: slideIn 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    @keyframes slideIn {
+      from {
+        opacity: 0;
+        transform: translateY(50px) scale(0.9);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
     }
 
     h1 {
-      font-family: 'Dancing Script', cursive;
-      font-size: clamp(2rem, 5vw, 3rem);
-      margin-bottom: 1rem;
-      text-shadow: 0 0 10px rgba(255,255,255,0.5);
-      animation: fadeIn 2s ease forwards;
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.5rem, 6vw, 3.8rem);
+      font-weight: 700;
+      margin-bottom: 1.5rem;
+      text-align: center;
+      color: #fff;
+      text-shadow: 0 2px 20px rgba(0, 0, 0, 0.2);
+      animation: glow 2s ease-in-out infinite;
     }
 
-    p {
+    @keyframes glow {
+      0%, 100% { text-shadow: 0 2px 20px rgba(255, 255, 255, 0.3); }
+      50% { text-shadow: 0 2px 30px rgba(255, 255, 255, 0.6); }
+    }
+
+    .message {
       text-align: center;
-      max-width: 600px;
-      line-height: 1.7;
-      font-size: clamp(1rem, 2vw, 1.2rem);
+      line-height: 1.8;
+      font-size: clamp(1rem, 2.2vw, 1.15rem);
+      color: #fff;
+      margin-bottom: 2rem;
+      font-weight: 500;
       opacity: 0;
-      animation: fadeIn 3s ease forwards 1s;
+      animation: fadeInUp 1s ease forwards 0.5s;
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .highlight {
+      font-weight: 600;
+      color: #ffe66d;
+      text-shadow: 0 0 10px rgba(255, 230, 109, 0.5);
+    }
+
+    button {
+      display: block;
+      margin: 0 auto;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      border: none;
+      padding: 15px 40px;
+      border-radius: 50px;
+      font-size: 1.1rem;
+      font-weight: 600;
+      cursor: pointer;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      opacity: 0;
+      animation: fadeInUp 1s ease forwards 1s;
+      position: relative;
+      overflow: hidden;
+    }
+
+    button::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 0;
+      height: 0;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.3);
+      transform: translate(-50%, -50%);
+      transition: width 0.6s, height 0.6s;
+    }
+
+    button:hover::before {
+      width: 300px;
+      height: 300px;
+    }
+
+    button:hover {
+      transform: translateY(-5px) scale(1.05);
+      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+    }
+
+    button span {
+      position: relative;
+      z-index: 1;
+    }
+
+    .footer-text {
+      position: fixed;
+      bottom: 8%;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 1.1rem;
+      color: rgba(255, 255, 255, 0.95);
+      font-weight: 600;
+      text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+      animation: pulse 2s ease-in-out infinite;
+      opacity: 0;
+      animation: fadeInUp 1s ease forwards 1.5s, pulse 2s ease-in-out infinite 2.5s;
+    }
+
+    @keyframes pulse {
+      0%, 100% { transform: translateX(-50%) scale(1); }
+      50% { transform: translateX(-50%) scale(1.05); }
     }
 
     .heart {
       position: absolute;
-      color: #fff;
-      font-size: 20px;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      animation: floatUp 4s ease-in infinite;
-      opacity: 0.8;
+      font-size: 25px;
+      animation: floatHeart 5s ease-in infinite;
+      pointer-events: none;
     }
 
-    @keyframes floatUp {
+    @keyframes floatHeart {
       0% {
-        transform: translateY(0) scale(0.8);
+        transform: translateY(0) rotate(0deg) scale(0);
         opacity: 0;
       }
-      30% {
+      10% {
         opacity: 1;
+        transform: translateY(-20vh) rotate(20deg) scale(1);
       }
       100% {
-        transform: translateY(-120vh) scale(1.2);
+        transform: translateY(-120vh) rotate(360deg) scale(0.5);
         opacity: 0;
       }
     }
 
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
+    .particle {
+      position: absolute;
+      width: 4px;
+      height: 4px;
+      background: white;
+      border-radius: 50%;
+      pointer-events: none;
+      animation: particleFloat 4s ease-in-out infinite;
     }
 
-    button {
-      margin-top: 2rem;
-      background: linear-gradient(45deg, #b993d6, #8ca6db);
-      color: white;
-      border: none;
-      padding: 12px 30px;
-      border-radius: 50px;
-      font-size: 1rem;
-      cursor: pointer;
-      box-shadow: 0 0 15px rgba(255,255,255,0.3);
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-      opacity: 0;
-      animation: fadeIn 3s ease forwards 2.5s;
-    }
-
-    button:hover {
-      transform: scale(1.05);
-      box-shadow: 0 0 25px rgba(255,255,255,0.5);
-    }
-
-    .floating-text {
-      position: fixed;
-      bottom: 10%;
-      font-size: 1rem;
-      color: rgba(255,255,255,0.8);
-      animation: fadeIn 2s ease forwards 3s;
-      text-align: center;
-      opacity: 0;
-    }
-
-    @keyframes hearts {
-      0% { transform: translateY(0) scale(0.8); opacity: 1; }
-      100% { transform: translateY(-100vh) scale(1.2); opacity: 0; }
+    @keyframes particleFloat {
+      0%, 100% {
+        transform: translateY(0) translateX(0);
+        opacity: 0;
+      }
+      50% {
+        opacity: 0.8;
+      }
+      100% {
+        transform: translateY(-100vh) translateX(50px);
+      }
     }
   </style>
 </head>
 <body>
-  <h1>Mi amor 💖</h1>
-  <p>
-    Sé que hoy el trabajo te hizo pasar un mal rato, que el dolor de cabeza y el estrés te pesaron más de lo normal…  
-    Pero quiero que sepas algo: eres increíble, fuerte y capaz de superar cualquier cosa.  
-  </p>
+  <div class="stars" id="stars"></div>
+  
+  <div class="container">
+    <h1>Mi amor 💖</h1>
+    <div class="message">
+      <p>
+        Sé que hoy no fue tu mejor día... El trabajo te dejó agotada, 
+        la cabeza te duele, el estómago te molesta, y solo quieres que todo pare un momento. 
+        <span class="highlight">Y está bien sentirte así</span>. 
+        <br><br>
+        Pero quiero que sepas algo: eres increíble, y aunque ahora no lo sientas, 
+        eres más fuerte de lo que crees. Esto va a pasar, te lo prometo. 
+        <br><br>
+        <span class="highlight">Mereces descansar, cuidarte y sentirte mejor</span>. 
+       recibe todo mi amor desde acá 💙
+      </p>
+    </div>
 
-  <button onclick="showHearts()">Haz clic para un poco de amor 💫</button>
+    <button onclick="activateLove()">
+      <span>Necesito un poco de amor 💫</span>
+    </button>
+  </div>
 
-  <div class="floating-text">Todo va a estar bien, mi vida 💜</div>
+  <div class="footer-text">Todo va a mejorar, mi vida 💜</div>
 
   <script>
+    const emojis = ['💜', '💖', '💫', '🌸', '✨', '💝', '🌟', '💗', '🦋', '🌺'];
+    
+    for (let i = 0; i < 50; i++) {
+      const star = document.createElement('div');
+      star.className = 'star';
+      star.style.left = Math.random() * 100 + '%';
+      star.style.top = Math.random() * 100 + '%';
+      star.style.animationDelay = Math.random() * 3 + 's';
+      document.getElementById('stars').appendChild(star);
+    }
+
+    function createParticle() {
+      const particle = document.createElement('div');
+      particle.className = 'particle';
+      particle.style.left = Math.random() * 100 + '%';
+      particle.style.animationDelay = Math.random() * 2 + 's';
+      particle.style.animationDuration = (Math.random() * 3 + 2) + 's';
+      document.body.appendChild(particle);
+      setTimeout(() => particle.remove(), 5000);
+    }
+
+    setInterval(createParticle, 300);
+
     function createHeart() {
       const heart = document.createElement('div');
-      heart.classList.add('heart');
-      heart.innerHTML = ['💜','💖','💫','🌸','🌷','💞'][Math.floor(Math.random() * 6)];
-      heart.style.left = Math.random() * 100 + 'vw';
-      heart.style.fontSize = (Math.random() * 20 + 15) + 'px';
-      heart.style.animationDuration = (Math.random() * 3 + 3) + 's';
+      heart.className = 'heart';
+      heart.innerHTML = emojis[Math.floor(Math.random() * emojis.length)];
+      heart.style.left = Math.random() * 100 + '%';
+      heart.style.fontSize = (Math.random() * 20 + 20) + 'px';
+      heart.style.animationDuration = (Math.random() * 2 + 4) + 's';
+      heart.style.animationDelay = Math.random() * 0.5 + 's';
       document.body.appendChild(heart);
       setTimeout(() => heart.remove(), 6000);
     }
 
-    function showHearts() {
-      setInterval(createHeart, 400);
+    let loveActivated = false;
+
+    function activateLove() {
+      if (!loveActivated) {
+        loveActivated = true;
+        setInterval(createHeart, 250);
+        for (let i = 0; i < 15; i++) {
+          setTimeout(createHeart, i * 100);
+        }
+      }
     }
   </script>
 </body>
