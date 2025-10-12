@@ -3,9 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Para ti 💙</title>
+  <title>Cupón de besitos 💙</title>
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Quicksand:wght@400;600&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600&family=Playfair+Display:wght@600&display=swap');
 
     * { margin: 0; padding: 0; box-sizing: border-box; }
 
@@ -20,8 +20,8 @@
       justify-content: center;
       align-items: center;
       flex-direction: column;
-      text-align: center;
       color: #fff;
+      text-align: center;
     }
 
     @keyframes gradientShift {
@@ -116,6 +116,35 @@
       50% { transform: scale(1.05); }
     }
 
+    .coupon {
+      display: none;
+      background: rgba(255, 255, 255, 0.2);
+      border: 2px dashed rgba(255, 255, 255, 0.7);
+      border-radius: 20px;
+      padding: 1.5rem;
+      margin-top: 1.8rem;
+      color: #e6faff;
+      font-size: 1.2rem;
+      animation: popIn 0.8s ease forwards;
+      position: relative;
+    }
+
+    @keyframes popIn {
+      from { transform: scale(0.8); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
+    }
+
+    .coupon h2 {
+      margin-bottom: 0.5rem;
+      font-size: 1.6rem;
+      color: #a7f1ff;
+    }
+
+    .coupon small {
+      font-size: 0.9rem;
+      opacity: 0.9;
+    }
+
     .heart {
       position: absolute;
       font-size: 22px;
@@ -130,42 +159,34 @@
       20% { opacity: 1; }
       100% { transform: translateY(-110vh) rotate(360deg) scale(1); opacity: 0; }
     }
-
-    #surprise {
-      display: none;
-      font-size: 1.3rem;
-      color: #e6faff;
-      margin-top: 1.5rem;
-      animation: fadeText 2s ease forwards;
-    }
-
-    @keyframes fadeText {
-      from { opacity: 0; transform: scale(0.9); }
-      to { opacity: 1; transform: scale(1); }
-    }
   </style>
 </head>
 <body>
 
   <div class="container">
-    <h1>Mi amor 💙</h1>
+    <h1>Hola, mi vida 💙</h1>
     <div class="message">
-      Sé que hoy fue difícil, mi vida…  
-      pero incluso en los días grises sigues brillando.  
+      Sé que hoy fue un día pesado y solo quieres desconectarte un rato.  
       <br><br>
-      <span class="highlight">Eres la calma en mi caos, mi razón de sonrisa</span>.  
+      Así que tengo algo para ti:  
+      <span class="highlight">un cupón válido por besitos y cariño sin límite 💙</span>  
       <br><br>
-      Respira, descansa, y deja que este momento sea solo para ti 💫
+      Porque te lo mereces, simplemente por ser tú.
     </div>
 
-    <button onclick="showSurprise()">
-      <span>💙 Quiero un abrazo tuyo 💙</span>
+    <button onclick="showCoupon()">
+      <span>🎁 Ver mi cupón 💙</span>
     </button>
 
-    <div id="surprise">💙 Imagínate rodeada de mis abrazos… te quiero más de lo que crees 💙</div>
+    <div id="coupon" class="coupon">
+      <h2>💙 Cupón para Besitos 💙</h2>
+      <p>Válido por besitos, abrazos y mucho amor cada vez que los necesites.  
+      Canjeable con solo una mirada o un mensajito 💌</p>
+      <small>*Sin fecha de vencimiento*</small>
+    </div>
   </div>
 
-  <div class="footer-text">Eres mi paz en cualquier tormenta 💙</div>
+  <div class="footer-text">Te mereces un descanso... y muchos besitos 💙</div>
 
   <script>
     function createHeart() {
@@ -179,12 +200,12 @@
       setTimeout(() => heart.remove(), 6000);
     }
 
-    function showSurprise() {
-      const surprise = document.getElementById('surprise');
-      if (surprise.style.display === 'none') {
-        surprise.style.display = 'block';
+    function showCoupon() {
+      const coupon = document.getElementById('coupon');
+      if (coupon.style.display === 'none' || coupon.style.display === '') {
+        coupon.style.display = 'block';
         for (let i = 0; i < 25; i++) {
-          setTimeout(createHeart, i * 200);
+          setTimeout(createHeart, i * 150);
         }
       }
     }
