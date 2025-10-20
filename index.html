@@ -3,25 +3,25 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Cupón de besitos 💙</title>
+  <title>Perdón por andar de caliente 😅🔥</title>
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600&family=Playfair+Display:wght@600&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600&family=Baloo+2:wght@600&display=swap');
 
     * { margin: 0; padding: 0; box-sizing: border-box; }
 
     body {
       font-family: 'Quicksand', sans-serif;
-      background: linear-gradient(-45deg, #00172b, #002b55, #003b70, #001f3f);
+      background: linear-gradient(-45deg, #ffb6b9, #fae3d9, #bbded6, #8ac6d1);
       background-size: 400% 400%;
-      animation: gradientShift 15s ease infinite;
+      animation: gradientShift 12s ease infinite;
       overflow: hidden;
       height: 100vh;
       display: flex;
       justify-content: center;
       align-items: center;
       flex-direction: column;
-      color: #fff;
       text-align: center;
+      color: #333;
     }
 
     @keyframes gradientShift {
@@ -30,14 +30,14 @@
     }
 
     .container {
-      background: rgba(255, 255, 255, 0.08);
-      backdrop-filter: blur(15px);
+      background: rgba(255, 255, 255, 0.65);
+      backdrop-filter: blur(12px);
       border-radius: 25px;
       padding: 2.5rem;
       width: 90%;
       max-width: 600px;
-      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.45);
-      animation: fadeIn 1.3s ease forwards;
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+      animation: fadeIn 1s ease forwards;
       position: relative;
       z-index: 2;
     }
@@ -48,36 +48,35 @@
     }
 
     h1 {
-      font-family: 'Playfair Display', serif;
+      font-family: 'Baloo 2', cursive;
       font-size: clamp(2rem, 5vw, 3rem);
-      color: #b9eaff;
+      color: #ff4e50;
       margin-bottom: 1rem;
-      text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
     }
 
     .message {
       line-height: 1.7;
       font-size: 1.1rem;
       margin-bottom: 1.5rem;
-      color: #d9f7ff;
+      color: #444;
     }
 
     .highlight {
-      color: #87dfff;
-      font-weight: 600;
-      text-shadow: 0 0 10px rgba(135, 223, 255, 0.5);
+      color: #ff4e50;
+      font-weight: 700;
+      text-shadow: 0 0 10px rgba(255, 78, 80, 0.3);
     }
 
     button {
       border: none;
-      background: linear-gradient(135deg, #0066ff, #0099ff);
+      background: linear-gradient(135deg, #ff4e50, #ff6f61);
       color: white;
       padding: 14px 35px;
       border-radius: 40px;
       cursor: pointer;
       font-weight: 600;
       font-size: 1rem;
-      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+      box-shadow: 0 6px 15px rgba(255, 78, 80, 0.4);
       transition: transform 0.3s ease, box-shadow 0.3s ease;
       position: relative;
       overflow: hidden;
@@ -85,7 +84,7 @@
 
     button:hover {
       transform: translateY(-4px);
-      box-shadow: 0 12px 25px rgba(0, 0, 0, 0.5);
+      box-shadow: 0 10px 25px rgba(255, 78, 80, 0.5);
     }
 
     button::before {
@@ -94,7 +93,7 @@
       top: 50%; left: 50%;
       width: 0; height: 0;
       border-radius: 50%;
-      background: rgba(255, 255, 255, 0.3);
+      background: rgba(255, 255, 255, 0.4);
       transform: translate(-50%, -50%);
       transition: width 0.6s, height 0.6s;
     }
@@ -103,31 +102,16 @@
       width: 250px; height: 250px;
     }
 
-    .footer-text {
-      margin-top: 1.5rem;
-      font-weight: 600;
-      opacity: 0.9;
-      font-size: 1.1rem;
-      animation: pulse 2s ease-in-out infinite;
-      color: #cdefff;
-    }
-
-    @keyframes pulse {
-      0%, 100% { transform: scale(1); }
-      50% { transform: scale(1.05); }
-    }
-
     .coupon {
       display: none;
-      background: rgba(255, 255, 255, 0.1);
-      border: 2px dashed rgba(255, 255, 255, 0.7);
+      background: rgba(255, 255, 255, 0.85);
+      border: 2px dashed #ff6f61;
       border-radius: 20px;
       padding: 1.5rem;
       margin-top: 1.8rem;
-      color: #e6faff;
-      font-size: 1.2rem;
+      color: #333;
+      font-size: 1.1rem;
       animation: popIn 0.8s ease forwards;
-      position: relative;
     }
 
     @keyframes popIn {
@@ -138,24 +122,31 @@
     .coupon h2 {
       margin-bottom: 0.5rem;
       font-size: 1.6rem;
-      color: #87dfff;
+      color: #ff4e50;
     }
 
-    .coupon small {
-      font-size: 0.9rem;
+    .footer-text {
+      margin-top: 1.5rem;
+      font-weight: 600;
       opacity: 0.9;
+      font-size: 1.1rem;
+      animation: pulse 2s ease-in-out infinite;
+      color: #ff4e50;
     }
 
-    .heart {
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+    }
+
+    .emoji {
       position: absolute;
       font-size: 22px;
-      animation: floatHeart 5s ease-in infinite;
+      animation: floatEmoji 6s ease-in infinite;
       pointer-events: none;
-      color: #6ddfff;
-      text-shadow: 0 0 15px rgba(135, 223, 255, 0.9);
     }
 
-    @keyframes floatHeart {
+    @keyframes floatEmoji {
       0% { transform: translateY(0) rotate(0deg) scale(0); opacity: 0; }
       20% { opacity: 1; }
       100% { transform: translateY(-110vh) rotate(360deg) scale(1); opacity: 0; }
@@ -165,40 +156,41 @@
 <body>
 
   <div class="container">
-    <h1>Hola, mi vida hermosa 💙</h1>
+    <h1>Okey… me pasé un poquito 😅🔥</h1>
     <div class="message">
-      Sé que hoy no fue un buen día y solo quieres descansar.  
+      Prometo que <span class="highlight">no fue mi intención</span> ponerme tan “intenso” 🤭  
       <br><br>
-      Así que tengo algo para ti:  
-      <span class="highlight">un cupón válido por besitos y cariño sin límite 💙</span>  
+      Pero es que tú… uff, eres un peligro con patas 😜  
       <br><br>
-      Porque te lo mereces, simplemente por ser tú.
+      Así que te traigo esto para compensar:  
+      <span class="highlight">un cupón de perdón con besos incluidos 😘</span>
     </div>
 
     <button onclick="showCoupon()">
-      <span>🎁 Ver mi cupón 💙</span>
+      💌 Ver mi cupón del perdón
     </button>
 
     <div id="coupon" class="coupon">
-      <h2>💙 Cupón para Besitos 💙</h2>
-      <p>Válido por besitos, abrazos y mucho amor cada vez que los necesites.  
-      Canjeable con solo una mirada de esas que me encantan o un mensajito 💌</p>
-      <small>*Valido desde el 13 de octubre sin fecha de vencimiento*</small>
+      <h2>🔥 Cupón del Perdón 🔥</h2>
+      <p>Válido por una disculpa sincera, besitos de compensación  
+      y promesa de buen comportamiento (al menos por un rato 😇).</p>
+      <small>*Usable cada vez que me ponga de intenso otra vez 🤭*</small>
     </div>
   </div>
 
-  <div class="footer-text">Te mereces un descanso... y muchos besitos mios 💙</div>
+  <div class="footer-text">Anda, perdóname... prometo portarme (más o menos) bien 😘</div>
 
   <script>
-    function createHeart() {
-      const heart = document.createElement('div');
-      heart.className = 'heart';
-      heart.innerHTML = '💙';
-      heart.style.left = Math.random() * 100 + '%';
-      heart.style.fontSize = (Math.random() * 20 + 20) + 'px';
-      heart.style.animationDuration = (Math.random() * 3 + 4) + 's';
-      document.body.appendChild(heart);
-      setTimeout(() => heart.remove(), 6000);
+    function createEmoji() {
+      const emoji = document.createElement('div');
+      emoji.className = 'emoji';
+      const emojis = ['🔥', '😘', '💋', '😅', '❤️'];
+      emoji.innerHTML = emojis[Math.floor(Math.random() * emojis.length)];
+      emoji.style.left = Math.random() * 100 + '%';
+      emoji.style.fontSize = (Math.random() * 20 + 25) + 'px';
+      emoji.style.animationDuration = (Math.random() * 3 + 4) + 's';
+      document.body.appendChild(emoji);
+      setTimeout(() => emoji.remove(), 6000);
     }
 
     function showCoupon() {
@@ -206,7 +198,7 @@
       if (coupon.style.display === 'none' || coupon.style.display === '') {
         coupon.style.display = 'block';
         for (let i = 0; i < 25; i++) {
-          setTimeout(createHeart, i * 150);
+          setTimeout(createEmoji, i * 150);
         }
       }
     }
