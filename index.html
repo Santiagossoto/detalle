@@ -3,9 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Un regalo especial para ti 🎁❤️</title>
+  <title>Tu regalo de cumpleaños 🏁❤️</title>
+
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600&family=Baloo+2:wght@600&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800&display=swap');
 
     * {
       margin: 0;
@@ -14,192 +15,231 @@
     }
 
     body {
-      font-family: 'Quicksand', sans-serif;
-      background: linear-gradient(-45deg, #ffb6b9, #fae3d9, #bbded6, #8ac6d1);
-      background-size: 400% 400%;
-      animation: gradientShift 12s ease infinite;
-      overflow-x: hidden;
+      font-family: 'Montserrat', sans-serif;
+      background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
       min-height: 100vh;
       display: flex;
       justify-content: center;
       align-items: center;
-      flex-direction: column;
-      text-align: center;
-      color: #333;
       padding: 1.5rem;
-    }
-
-    @keyframes gradientShift {
-      0%, 100% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
+      color: #fff;
+      overflow-x: hidden;
     }
 
     .container {
-      background: rgba(255, 255, 255, 0.65);
-      backdrop-filter: blur(12px);
-      border-radius: 25px;
-      padding: 2rem 1.5rem;
+      max-width: 700px;
       width: 100%;
-      max-width: 600px;
-      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+      background: rgba(255,255,255,0.08);
+      backdrop-filter: blur(15px);
+      border-radius: 28px;
+      box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+      overflow: hidden;
       animation: fadeIn 1s ease forwards;
-      position: relative;
-      z-index: 2;
     }
 
     @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(30px); }
+      from { opacity: 0; transform: translateY(40px); }
       to { opacity: 1; transform: translateY(0); }
     }
 
-    h1 {
-      font-family: 'Baloo 2', cursive;
-      font-size: clamp(1.8rem, 6vw, 3rem);
-      color: #ff4e50;
-      margin-bottom: 1rem;
-      line-height: 1.2;
+    /* Hero */
+    .hero {
+      position: relative;
     }
 
-    .message {
-      line-height: 1.7;
-      font-size: clamp(1rem, 4vw, 1.1rem);
+    .hero img {
+      width: 100%;
+      height: 320px;
+      object-fit: cover;
+      filter: brightness(0.75);
+    }
+
+    .hero-text {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 1rem;
+    }
+
+    .hero-text h1 {
+      font-size: clamp(2rem, 5vw, 3rem);
+      font-weight: 800;
+      letter-spacing: 1px;
+    }
+
+    .hero-text span {
+      margin-top: 0.5rem;
+      font-weight: 600;
+      color: #ffcc00;
+    }
+
+    /* Content */
+    .content {
+      padding: 2rem;
+      text-align: center;
+    }
+
+    .content p {
+      font-size: 1.05rem;
+      line-height: 1.8;
       margin-bottom: 1.5rem;
-      color: #444;
+      opacity: 0.95;
     }
 
     .highlight {
-      color: #ff4e50;
+      color: #ffcc00;
       font-weight: 700;
-      text-shadow: 0 0 10px rgba(255, 78, 80, 0.3);
+    }
+
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap: 1rem;
+      margin: 1.5rem 0;
+    }
+
+    .gallery img {
+      width: 100%;
+      height: 140px;
+      object-fit: cover;
+      border-radius: 16px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.4);
+      transition: transform 0.4s ease;
+    }
+
+    .gallery img:hover {
+      transform: scale(1.08);
     }
 
     button {
+      margin-top: 1.2rem;
       border: none;
-      background: linear-gradient(135deg, #ff4e50, #ff6f61);
-      color: white;
-      padding: 12px 30px;
-      border-radius: 40px;
+      padding: 14px 40px;
+      border-radius: 50px;
+      font-size: 1rem;
+      font-weight: 700;
       cursor: pointer;
-      font-weight: 600;
-      font-size: clamp(0.9rem, 3.5vw, 1rem);
-      box-shadow: 0 6px 15px rgba(255, 78, 80, 0.4);
+      color: #000;
+      background: linear-gradient(135deg, #ffcc00, #ff9900);
+      box-shadow: 0 10px 25px rgba(255,204,0,0.5);
       transition: transform 0.3s ease, box-shadow 0.3s ease;
-      width: fit-content;
-      margin: 0 auto;
-      display: block;
     }
 
     button:hover {
       transform: translateY(-4px);
-      box-shadow: 0 10px 25px rgba(255, 78, 80, 0.5);
+      box-shadow: 0 15px 35px rgba(255,204,0,0.7);
     }
 
-    .coupon {
+    .ticket {
       display: none;
-      background: rgba(255, 255, 255, 0.9);
-      border: 2px dashed #ff6f61;
+      margin-top: 2rem;
+      padding: 1.5rem;
       border-radius: 20px;
-      padding: 1.2rem;
+      background: rgba(0,0,0,0.4);
+      border: 2px dashed #ffcc00;
+      animation: pop 0.8s ease forwards;
+    }
+
+    @keyframes pop {
+      from { opacity: 0; transform: scale(0.85); }
+      to { opacity: 1; transform: scale(1); }
+    }
+
+    .ticket h2 {
+      color: #ffcc00;
+      margin-bottom: 0.8rem;
+    }
+
+    .footer {
       margin-top: 1.5rem;
-      color: #333;
-      animation: popIn 0.8s ease forwards;
-    }
-
-    @keyframes popIn {
-      from { transform: scale(0.8); opacity: 0; }
-      to { transform: scale(1); opacity: 1; }
-    }
-
-    .coupon h2 {
-      margin-bottom: 0.5rem;
-      font-size: clamp(1.3rem, 4.5vw, 1.6rem);
-      color: #ff4e50;
-    }
-
-    .footer-text {
-      margin-top: 1.5rem;
-      font-weight: 600;
+      font-size: 0.95rem;
       opacity: 0.9;
-      font-size: clamp(0.9rem, 3.5vw, 1.1rem);
-      animation: pulse 2s ease-in-out infinite;
-      color: #ff4e50;
-    }
-
-    @keyframes pulse {
-      0%, 100% { transform: scale(1); }
-      50% { transform: scale(1.05); }
     }
 
     .emoji {
       position: absolute;
-      font-size: 22px;
-      animation: floatEmoji 6s ease-in infinite;
+      font-size: 26px;
+      animation: float 6s linear infinite;
       pointer-events: none;
     }
 
-    @keyframes floatEmoji {
-      0% { transform: translateY(0) rotate(0deg) scale(0); opacity: 0; }
+    @keyframes float {
+      0% { transform: translateY(0); opacity: 0; }
       20% { opacity: 1; }
-      100% { transform: translateY(-110vh) rotate(360deg) scale(1); opacity: 0; }
+      100% { transform: translateY(-120vh); opacity: 0; }
     }
   </style>
 </head>
+
 <body>
 
   <div class="container">
-    <h1>Feliz cumpleaños, amor 🎂❤️</h1>
-    <div class="message">
-      Hoy no vengo a pedir perdón…  
-      <br><br>
-      Vengo a decirte que te amo y que tu regalo  
-      <span class="highlight">no es cualquier cosa</span> 😌  
-      <br><br>
-      Prepárate porque el  
-      <span class="highlight">24 de enero</span>  
-      nos vamos juntos al  
-      <span class="highlight">MOTOR CAR MOVEMENT SHOW 2026</span> 🚗🔥  
+
+    <div class="hero">
+      <img src="https://images.unsplash.com/photo-1503376780353-7e6692767b70" alt="Car show">
+      <div class="hero-text">
+        <h1>Feliz Cumpleaños ❤️</h1>
+        <span>Prepárate para algo increíble</span>
+      </div>
     </div>
 
-    <button onclick="showCoupon()">
-      🎁 Ver mi regalo sorpresa
-    </button>
-
-    <div id="coupon" class="coupon">
-      <h2>🎉 Regalo de Cumpleaños 🎉</h2>
+    <div class="content">
       <p>
-        Entrada oficial para el <strong>MOTOR CAR MOVEMENT SHOW 2026</strong><br>
-        📅 <strong>24 de enero</strong><br><br>
-        Incluye: emoción, carros brutales, fotos juntos  
-        y un novio feliz de verte sonreír ❤️
+        Este año tu regalo no se envuelve…  
+        <br>
+        <span class="highlight">se vive</span>, se siente y se acelera 🏁  
+        <br><br>
+        El <span class="highlight">24 de enero</span>  
+        nos vamos juntos al  
+        <span class="highlight">MOTOR CAR MOVEMENT SHOW 2026</span> 🚗🔥
       </p>
-      <small>*Válido solo si vamos juntos 😘*</small>
-    </div>
-  </div>
 
-  <div class="footer-text">
-    Te amo ❤️ Gracias por cumplir años tan bonito
+      <div class="gallery">
+        <img src="https://images.unsplash.com/photo-1519681393784-d120267933ba">
+        <img src="https://images.unsplash.com/photo-1493238792000-8113da705763">
+        <img src="https://images.unsplash.com/photo-1503736334956-4c8f8e92946d">
+      </div>
+
+      <button onclick="showTicket()">🎟️ Ver mi regalo</button>
+
+      <div id="ticket" class="ticket">
+        <h2>Entrada Oficial 🎉</h2>
+        <p>
+          MOTOR CAR MOVEMENT SHOW 2026<br>
+          📅 24 de enero<br><br>
+          Incluye: carros brutales, fotos juntos,  
+          adrenalina y un recuerdo inolvidable ❤️
+        </p>
+      </div>
+
+      <div class="footer">
+        Con amor, tu copiloto favorito 😘
+      </div>
+    </div>
+
   </div>
 
   <script>
     function createEmoji() {
       const emoji = document.createElement('div');
       emoji.className = 'emoji';
-      const emojis = ['🚗', '🔥', '❤️', '🎉', '🏁'];
+      const emojis = ['🚗','🔥','🏁','❤️','✨'];
       emoji.innerHTML = emojis[Math.floor(Math.random() * emojis.length)];
       emoji.style.left = Math.random() * 100 + '%';
-      emoji.style.fontSize = (Math.random() * 20 + 25) + 'px';
       emoji.style.animationDuration = (Math.random() * 3 + 4) + 's';
       document.body.appendChild(emoji);
       setTimeout(() => emoji.remove(), 6000);
     }
 
-    function showCoupon() {
-      const coupon = document.getElementById('coupon');
-      if (coupon.style.display === 'none' || coupon.style.display === '') {
-        coupon.style.display = 'block';
-        for (let i = 0; i < 25; i++) {
-          setTimeout(createEmoji, i * 150);
-        }
+    function showTicket() {
+      const ticket = document.getElementById('ticket');
+      ticket.style.display = 'block';
+      for (let i = 0; i < 20; i++) {
+        setTimeout(createEmoji, i * 180);
       }
     }
   </script>
