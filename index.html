@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Perdón por andar de caliente 😅🔥</title>
+  <title>Un regalo especial para ti 🎁❤️</title>
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600&family=Baloo+2:wght@600&display=swap');
 
@@ -65,7 +65,6 @@
       font-size: clamp(1rem, 4vw, 1.1rem);
       margin-bottom: 1.5rem;
       color: #444;
-      word-wrap: break-word;
     }
 
     .highlight {
@@ -85,8 +84,6 @@
       font-size: clamp(0.9rem, 3.5vw, 1rem);
       box-shadow: 0 6px 15px rgba(255, 78, 80, 0.4);
       transition: transform 0.3s ease, box-shadow 0.3s ease;
-      position: relative;
-      overflow: hidden;
       width: fit-content;
       margin: 0 auto;
       display: block;
@@ -97,21 +94,6 @@
       box-shadow: 0 10px 25px rgba(255, 78, 80, 0.5);
     }
 
-    button::before {
-      content: '';
-      position: absolute;
-      top: 50%; left: 50%;
-      width: 0; height: 0;
-      border-radius: 50%;
-      background: rgba(255, 255, 255, 0.4);
-      transform: translate(-50%, -50%);
-      transition: width 0.6s, height 0.6s;
-    }
-
-    button:hover::before {
-      width: 250px; height: 250px;
-    }
-
     .coupon {
       display: none;
       background: rgba(255, 255, 255, 0.9);
@@ -120,7 +102,6 @@
       padding: 1.2rem;
       margin-top: 1.5rem;
       color: #333;
-      font-size: clamp(0.9rem, 3.5vw, 1.1rem);
       animation: popIn 0.8s ease forwards;
     }
 
@@ -142,7 +123,6 @@
       font-size: clamp(0.9rem, 3.5vw, 1.1rem);
       animation: pulse 2s ease-in-out infinite;
       color: #ff4e50;
-      text-align: center;
     }
 
     @keyframes pulse {
@@ -162,73 +142,49 @@
       20% { opacity: 1; }
       100% { transform: translateY(-110vh) rotate(360deg) scale(1); opacity: 0; }
     }
-
-    /* 📱 Mejoras para móviles */
-    @media (max-width: 480px) {
-      body {
-        padding: 1rem;
-      }
-
-      .container {
-        padding: 1.5rem 1rem;
-        border-radius: 20px;
-      }
-
-      button {
-        width: 100%;
-        padding: 12px;
-        font-size: 1rem;
-      }
-
-      .coupon {
-        padding: 1rem;
-      }
-    }
-
-    /* 💻 Mejoras para pantallas grandes */
-    @media (min-width: 900px) {
-      .container {
-        padding: 3rem 3rem;
-      }
-      .message {
-        font-size: 1.2rem;
-      }
-    }
-
   </style>
 </head>
 <body>
 
   <div class="container">
-    <h1>Amooor me pasé un poquito 😅🔥</h1>
+    <h1>Feliz cumpleaños, amor 🎂❤️</h1>
     <div class="message">
-      Prometo que <span class="highlight">no fue mi intención</span> ponerme tan bellaco jsjsj  
+      Hoy no vengo a pedir perdón…  
       <br><br>
-      Pero es que tú... uff, eres mi debilidad 😜  
+      Vengo a decirte que te amo y que tu regalo  
+      <span class="highlight">no es cualquier cosa</span> 😌  
       <br><br>
-      Así que te traigo esto para compensar:  
-      <span class="highlight">un cupón de perdón con besos incluidos 😘</span>
+      Prepárate porque el  
+      <span class="highlight">24 de enero</span>  
+      nos vamos juntos al  
+      <span class="highlight">MOTOR CAR MOVEMENT SHOW 2026</span> 🚗🔥  
     </div>
 
     <button onclick="showCoupon()">
-      💌 Ver mi cupón del perdón
+      🎁 Ver mi regalo sorpresa
     </button>
 
     <div id="coupon" class="coupon">
-      <h2>🔥 Cupón del Perdón 🔥</h2>
-      <p>Válido por una disculpa sincera, besitos de compensación  
-      y promesa de buen comportamiento (al menos por un rato 😇).</p>
-      <small>*Usable cada vez que me ponga de bellaco otra vez 🤭*</small>
+      <h2>🎉 Regalo de Cumpleaños 🎉</h2>
+      <p>
+        Entrada oficial para el <strong>MOTOR CAR MOVEMENT SHOW 2026</strong><br>
+        📅 <strong>24 de enero</strong><br><br>
+        Incluye: emoción, carros brutales, fotos juntos  
+        y un novio feliz de verte sonreír ❤️
+      </p>
+      <small>*Válido solo si vamos juntos 😘*</small>
     </div>
   </div>
 
-  <div class="footer-text">Perdóname, prometo portarme (más o menos) bien 😘</div>
+  <div class="footer-text">
+    Te amo ❤️ Gracias por cumplir años tan bonito
+  </div>
 
   <script>
     function createEmoji() {
       const emoji = document.createElement('div');
       emoji.className = 'emoji';
-      const emojis = ['🔥', '😘', '💋', '😅', '❤️'];
+      const emojis = ['🚗', '🔥', '❤️', '🎉', '🏁'];
       emoji.innerHTML = emojis[Math.floor(Math.random() * emojis.length)];
       emoji.style.left = Math.random() * 100 + '%';
       emoji.style.fontSize = (Math.random() * 20 + 25) + 'px';
@@ -247,5 +203,6 @@
       }
     }
   </script>
+
 </body>
 </html>
