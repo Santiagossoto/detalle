@@ -298,6 +298,11 @@
       filter: brightness(0.85);
       animation: imgReveal 0.8s ease forwards;
       opacity: 0;
+      cursor: pointer; /* Indicador visual de que las imágenes son clickeables */
+    }
+
+    .gallery img:active {
+      transform: scale(0.95);
     }
 
     .gallery img:nth-child(1) { animation-delay: 0.1s; }
@@ -367,6 +372,109 @@
       75% { transform: rotate(10deg); }
     }
 
+    /* Lightbox para ampliar imágenes */
+    .lightbox {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.95);
+      z-index: 1000;
+      justify-content: center;
+      align-items: center;
+      padding: 1rem;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .lightbox.active {
+      display: flex;
+      animation: fadeInLightbox 0.3s ease;
+    }
+
+    @keyframes fadeInLightbox {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    .lightbox-content {
+      position: relative;
+      max-width: 100%;
+      max-height: 90vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .lightbox-img {
+      max-width: 100%;
+      max-height: 80vh;
+      object-fit: contain;
+      border-radius: 12px;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.8);
+      animation: zoomIn 0.3s ease;
+    }
+
+    @keyframes zoomIn {
+      from { transform: scale(0.8); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
+    }
+
+    .lightbox-close {
+      position: absolute;
+      top: -45px;
+      right: 0;
+      background: rgba(255,255,255,0.15);
+      border: none;
+      color: #fff;
+      font-size: 1.5rem;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.3s ease;
+    }
+
+    .lightbox-close:active {
+      background: rgba(255,255,255,0.3);
+    }
+
+    .lightbox-nav {
+      display: flex;
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+
+    .lightbox-nav button {
+      background: rgba(77,166,255,0.3);
+      border: 1px solid rgba(77,166,255,0.5);
+      color: #fff;
+      padding: 10px 20px;
+      border-radius: 25px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      opacity: 1;
+      pointer-events: auto;
+      width: auto;
+      max-width: none;
+      animation: none;
+      box-shadow: none;
+    }
+
+    .lightbox-nav button:active {
+      background: rgba(77,166,255,0.5);
+      transform: scale(0.95);
+    }
+
+    .lightbox-counter {
+      color: rgba(255,255,255,0.7);
+      font-size: 0.85rem;
+      margin-top: 0.8rem;
+    }
+
     /* Media query para pantallas más grandes (tablets/desktop) */
     @media (min-width: 480px) {
       body {
@@ -409,6 +517,21 @@
 </head>
 
 <body>
+
+  <!-- Modal lightbox para ampliar imágenes -->
+  <div class="lightbox" id="lightbox" onclick="closeLightbox(event)">
+    <div class="lightbox-content" onclick="event.stopPropagation()">
+      <button class="lightbox-close" onclick="closeLightbox()">&times;</button>
+      <img class="lightbox-img" id="lightbox-img" src="/placeholder.svg" alt="Imagen ampliada">
+      <div class="lightbox-nav">
+        <button onclick="prevImage()">&#8592; Anterior</button>
+        <button onclick="nextImage()">Siguiente &#8594;</button>
+      </div>
+      <div class="lightbox-counter">
+        <span id="lightbox-counter">1 / 6</span>
+      </div>
+    </div>
+  </div>
 
   <div class="container">
 
@@ -457,7 +580,7 @@
           </div>
           <div class="clue-content" id="clue-2">
             <strong>Dos personas</strong><br>
-            Tú y yo… juntos ✨
+            Tú y yo… juntos en una aventura que será solo nuestra ✨
           </div>
         </div>
 
@@ -468,7 +591,7 @@
           </div>
           <div class="clue-content" id="clue-3">
             <strong>Motores, velocidad, emoción…</strong><br>
-            Algo nos espera 🏁
+            Algo que acelera el corazón nos espera 🏁
           </div>
         </div>
       </div>
@@ -482,7 +605,7 @@
           <div class="lock-icon">🎉</div>
           <h2>¡Secreto revelado! 💙</h2>
           <p>
-            <strong>NOS VAMOS PARA EL MOTOR CAR MOVEMENT SHOW 2026</strong><br><br>
+            <strong>MOTOR CAR MOVEMENT SHOW 2026</strong><br><br>
             📅 24 de enero<br><br>
             Emociones, miradas cómplices,<br>
             fotos juntos…<br>
@@ -501,7 +624,7 @@
       </div>
 
       <div class="footer">
-        Para la princesa que hace especial cada aventura, te amo hoy mañana y siempre 💙
+        Para la princesa que hace especial cada aventura 💙
       </div>
     </div>
 
@@ -510,6 +633,59 @@
   <script>
     let cluesRevealed = 0;
     const totalClues = 3;
+    
+    let currentImageIndex = 0;
+    let galleryImages = [];
+
+    function initGallery() {
+      galleryImages = Array.from(document.querySelectorAll('.gallery img'));
+      galleryImages.forEach((img, index) => {
+        img.addEventListener('click', () => openLightbox(index));
+      });
+    }
+
+    function openLightbox(index) {
+      currentImageIndex = index;
+      const lightbox = document.getElementById('lightbox');
+      const lightboxImg = document.getElementById('lightbox-img');
+      
+      lightboxImg.src = galleryImages[index].src;
+      updateCounter();
+      lightbox.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeLightbox(event) {
+      if (event && event.target !== event.currentTarget) return;
+      const lightbox = document.getElementById('lightbox');
+      lightbox.classList.remove('active');
+      document.body.style.overflow = '';
+    }
+
+    function nextImage() {
+      currentImageIndex = (currentImageIndex + 1) % galleryImages.length;
+      updateLightboxImage();
+    }
+
+    function prevImage() {
+      currentImageIndex = (currentImageIndex - 1 + galleryImages.length) % galleryImages.length;
+      updateLightboxImage();
+    }
+
+    function updateLightboxImage() {
+      const lightboxImg = document.getElementById('lightbox-img');
+      lightboxImg.style.opacity = '0';
+      setTimeout(() => {
+        lightboxImg.src = galleryImages[currentImageIndex].src;
+        lightboxImg.style.opacity = '1';
+        updateCounter();
+      }, 150);
+    }
+
+    function updateCounter() {
+      document.getElementById('lightbox-counter').textContent = 
+        `${currentImageIndex + 1} / ${galleryImages.length}`;
+    }
 
     function revealClue(clueNumber) {
       const clue = document.querySelector(`.clue:nth-child(${clueNumber})`);
@@ -543,6 +719,7 @@
       
       setTimeout(() => {
         revealContainer.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        initGallery(); // Inicializar lightbox después de mostrar galería
       }, 300);
       
       for (let i = 0; i < 30; i++) {
@@ -561,6 +738,15 @@
       document.body.appendChild(emoji);
       setTimeout(() => emoji.remove(), 6000);
     }
+
+    document.addEventListener('keydown', (e) => {
+      const lightbox = document.getElementById('lightbox');
+      if (!lightbox.classList.contains('active')) return;
+      
+      if (e.key === 'Escape') closeLightbox();
+      if (e.key === 'ArrowRight') nextImage();
+      if (e.key === 'ArrowLeft') prevImage();
+    });
   </script>
 
 </body>
