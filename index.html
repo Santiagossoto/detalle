@@ -3,10 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-  <title>Algo te espera… 💙✨</title>
+  <title>Algo especial te espera… 💙✨</title>
 
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap');
 
     * {
       margin: 0;
@@ -15,74 +15,104 @@
     }
 
     body {
-      font-family: 'Montserrat', sans-serif;
-      background: radial-gradient(circle at top, #0b1c2d, #000);
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #0a0e27 0%, #1a1f3a 50%, #0a0e27 100%);
       min-height: 100vh;
-      min-height: 100dvh; /* Usar dvh para móviles con barras dinámicas */
+      min-height: 100dvh;
       display: flex;
       justify-content: center;
-      align-items: flex-start; /* Alinear arriba en móvil */
-      padding: 0.8rem;
+      align-items: flex-start;
+      padding: 1rem;
       color: #fff;
       overflow-x: hidden;
+      position: relative;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background: 
+        radial-gradient(circle at 20% 30%, rgba(77,166,255,0.08) 0%, transparent 50%),
+        radial-gradient(circle at 80% 70%, rgba(255,77,166,0.06) 0%, transparent 50%);
+      pointer-events: none;
+      animation: bgPulse 8s ease-in-out infinite;
+    }
+
+    @keyframes bgPulse {
+      0%, 100% { opacity: 0.5; }
+      50% { opacity: 1; }
+    }
+
+    .particles {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .particle {
+      position: absolute;
+      width: 3px;
+      height: 3px;
+      background: rgba(77,166,255,0.6);
+      border-radius: 50%;
+      animation: particleFloat 15s linear infinite;
+    }
+
+    @keyframes particleFloat {
+      0% { transform: translateY(100vh) scale(0); opacity: 0; }
+      10% { opacity: 1; }
+      90% { opacity: 1; }
+      100% { transform: translateY(-100vh) scale(1); opacity: 0; }
     }
 
     .container {
-      max-width: 420px; /* Máximo más pequeño para móvil */
+      max-width: 420px;
       width: 100%;
-      background: rgba(255,255,255,0.06);
-      backdrop-filter: blur(18px);
-      border-radius: 24px; /* Radio más pequeño */
-      box-shadow: 0 20px 50px rgba(0,0,0,0.7);
+      background: rgba(15,20,40,0.85);
+      backdrop-filter: blur(30px);
+      border-radius: 28px;
+      box-shadow: 
+        0 30px 80px rgba(0,0,0,0.9),
+        0 0 0 1px rgba(77,166,255,0.1),
+        inset 0 0 60px rgba(77,166,255,0.03);
       overflow: hidden;
-      animation: fadeIn 1.2s ease forwards;
+      animation: containerEntry 1.5s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
       margin: 0.5rem 0;
+      position: relative;
+      z-index: 2;
     }
 
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(30px); }
-      to { opacity: 1; transform: translateY(0); }
+    @keyframes containerEntry {
+      0% { opacity: 0; transform: translateY(50px) scale(0.9); }
+      100% { opacity: 1; transform: translateY(0) scale(1); }
     }
 
-    /* Hero misterioso */
+    /* Hero con efecto misterioso mejorado */
     .hero {
       position: relative;
-      height: 200px; /* Altura reducida para móvil */
-      background: linear-gradient(135deg, #0a1628 0%, #1a3a5c 50%, #0a1628 100%);
+      height: 180px;
+      background: linear-gradient(135deg, #0a1628 0%, #2a4a7c 50%, #0a1628 100%);
       overflow: hidden;
+      border-bottom: 2px solid rgba(77,166,255,0.2);
     }
 
     .hero::before {
       content: "";
       position: absolute;
-      inset: 0;
+      inset: -50%;
       background: 
-        radial-gradient(circle at 20% 30%, rgba(77,166,255,0.15) 0%, transparent 40%),
-        radial-gradient(circle at 80% 70%, rgba(77,166,255,0.1) 0%, transparent 40%);
+        radial-gradient(circle at center, rgba(77,166,255,0.2) 0%, transparent 70%);
+      animation: heroGlow 4s ease-in-out infinite;
     }
 
-    .mystery-icons {
-      position: absolute;
-      inset: 0;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      gap: 1.2rem; /* Gap reducido */
-      font-size: 2.5rem; /* Tamaño reducido */
-      opacity: 0.3;
+    @keyframes heroGlow {
+      0%, 100% { transform: scale(1) rotate(0deg); opacity: 0.5; }
+      50% { transform: scale(1.2) rotate(180deg); opacity: 1; }
     }
 
-    .mystery-icons span {
-      animation: pulse 2s ease-in-out infinite;
-    }
-
-    .mystery-icons span:nth-child(2) { animation-delay: 0.3s; }
-    .mystery-icons span:nth-child(3) { animation-delay: 0.6s; }
-
-    @keyframes pulse {
-      0%, 100% { transform: scale(1); opacity: 0.3; }
-      50% { transform: scale(1.1); opacity: 0.5; }
-    }
+    
 
     .hero-text {
       position: absolute;
@@ -93,212 +123,413 @@
       align-items: center;
       text-align: center;
       padding: 1rem;
-      z-index: 1;
+      z-index: 2;
+      background: radial-gradient(circle at center, rgba(0,0,0,0.4) 0%, transparent 70%);
     }
 
     .hero-text h1 {
-      font-size: 1.6rem; /* Tamaño fijo para móvil */
+      font-size: 1.8rem;
       font-weight: 800;
-      letter-spacing: 0.5px;
-      text-shadow: 0 4px 20px rgba(0,0,0,0.5);
+      letter-spacing: 1px;
+      text-shadow: 
+        0 0 20px rgba(77,166,255,0.6),
+        0 4px 20px rgba(0,0,0,0.8);
       line-height: 1.3;
+      animation: titleGlow 2s ease-in-out infinite;
+    }
+
+    @keyframes titleGlow {
+      0%, 100% { text-shadow: 0 0 20px rgba(77,166,255,0.6), 0 4px 20px rgba(0,0,0,0.8); }
+      50% { text-shadow: 0 0 30px rgba(77,166,255,1), 0 4px 20px rgba(0,0,0,0.8); }
     }
 
     .hero-text span {
-      margin-top: 0.5rem;
+      margin-top: 0.7rem;
       font-weight: 600;
-      font-size: 0.9rem;
-      color: #4da6ff;
-      opacity: 0.95;
+      font-size: 1rem;
+      background: linear-gradient(90deg, #4da6ff, #ff77cc);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      animation: gradientShift 3s ease infinite;
+    }
+
+    @keyframes gradientShift {
+      0%, 100% { filter: hue-rotate(0deg); }
+      50% { filter: hue-rotate(20deg); }
     }
 
     /* Content */
     .content {
-      padding: 1.5rem 1.2rem; /* Padding reducido */
+      padding: 2rem 1.4rem;
       text-align: center;
     }
 
-    .content > p {
-      font-size: 0.95rem; /* Tamaño reducido */
-      line-height: 1.7;
-      margin-bottom: 1.2rem;
+    .intro-text {
+      font-size: 1.05rem;
+      line-height: 1.8;
+      margin-bottom: 1.5rem;
       opacity: 0.95;
+      animation: fadeInUp 1s ease 0.3s backwards;
+    }
+
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
     }
 
     .highlight {
       color: #4da6ff;
       font-weight: 700;
+      text-shadow: 0 0 10px rgba(77,166,255,0.4);
     }
 
-    /* Progress bar */
+    /* Progress mejorado */
     .progress-container {
-      margin: 1rem 0 1.5rem;
+      margin: 1.5rem 0 2rem;
+      animation: fadeInUp 1s ease 0.5s backwards;
     }
 
     .progress-text {
-      font-size: 0.8rem;
-      opacity: 0.7;
-      margin-bottom: 0.4rem;
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: #4da6ff;
+      margin-bottom: 0.6rem;
+      letter-spacing: 1px;
+      text-transform: uppercase;
     }
 
     .progress-bar {
-      height: 5px;
-      background: rgba(255,255,255,0.1);
-      border-radius: 10px;
+      height: 8px;
+      background: rgba(20,30,50,0.8);
+      border-radius: 20px;
       overflow: hidden;
+      box-shadow: inset 0 2px 8px rgba(0,0,0,0.5);
+      position: relative;
+    }
+
+    .progress-bar::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+      animation: shimmer 2s infinite;
+    }
+
+    @keyframes shimmer {
+      0% { transform: translateX(-100%); }
+      100% { transform: translateX(100%); }
     }
 
     .progress-fill {
       height: 100%;
-      background: linear-gradient(90deg, #4da6ff, #1e90ff);
-      border-radius: 10px;
+      background: linear-gradient(90deg, #4da6ff, #1e90ff, #4da6ff);
+      background-size: 200% 100%;
+      border-radius: 20px;
       width: 0%;
-      transition: width 0.5s ease;
+      transition: width 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+      box-shadow: 0 0 20px rgba(77,166,255,0.8);
+      animation: progressGlow 2s ease-in-out infinite;
     }
 
-    /* Pistas misteriosas */
+    @keyframes progressGlow {
+      0%, 100% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+    }
+
+    /* Pistas mejoradas */
     .clues-container {
-      margin: 1rem 0;
+      margin: 0 0 2rem;
     }
 
     .clue {
-      background: rgba(77,166,255,0.1);
-      border: 1px solid rgba(77,166,255,0.3);
-      border-radius: 14px; /* Radio reducido */
-      padding: 1rem;
-      margin-bottom: 0.8rem;
+      background: linear-gradient(135deg, rgba(77,166,255,0.08) 0%, rgba(30,144,255,0.08) 100%);
+      border: 1.5px solid rgba(77,166,255,0.25);
+      border-radius: 18px;
+      padding: 1.2rem;
+      margin-bottom: 1rem;
       cursor: pointer;
-      transition: all 0.3s ease;
+      transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
       position: relative;
       overflow: hidden;
-      -webkit-tap-highlight-color: transparent; /* Quitar highlight en tap */
+      -webkit-tap-highlight-color: transparent;
+      animation: fadeInUp 1s ease backwards;
+    }
+
+    .clue:nth-child(1) { animation-delay: 0.7s; }
+    .clue:nth-child(2) { animation-delay: 0.9s; }
+    .clue:nth-child(3) { animation-delay: 1.1s; }
+
+    .clue::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(77,166,255,0.2), transparent);
+      opacity: 0;
+      transition: opacity 0.4s ease;
+    }
+
+    .clue:hover::before {
+      opacity: 1;
     }
 
     .clue:active {
-      transform: scale(0.98); /* Feedback táctil */
-      background: rgba(77,166,255,0.2);
+      transform: scale(0.95);
+    }
+    
+    .clue:not(.revealed) {
+      animation: pulseHint 2s ease-in-out infinite;
+    }
+    
+    @keyframes pulseHint {
+      0%, 100% { box-shadow: 0 0 0 rgba(77,166,255,0); }
+      50% { box-shadow: 0 0 20px rgba(77,166,255,0.4); }
     }
 
     .clue.revealed {
-      background: rgba(77,166,255,0.2);
+      background: linear-gradient(135deg, rgba(77,166,255,0.2) 0%, rgba(30,144,255,0.15) 100%);
       border-color: #4da6ff;
+      box-shadow: 
+        0 8px 25px rgba(77,166,255,0.3),
+        inset 0 0 30px rgba(77,166,255,0.1);
+      transform: scale(1.02);
     }
 
     .clue-header {
       display: flex;
       align-items: center;
-      gap: 0.8rem;
+      gap: 1rem;
     }
 
     .clue-number {
-      width: 32px; /* Tamaño reducido */
-      height: 32px;
+      width: 38px;
+      height: 38px;
       background: linear-gradient(135deg, #4da6ff, #1e90ff);
       border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
       font-weight: 800;
-      font-size: 0.85rem;
+      font-size: 0.95rem;
       color: #000;
       flex-shrink: 0;
+      box-shadow: 0 4px 15px rgba(77,166,255,0.5);
+      transition: transform 0.4s ease;
+    }
+
+    .clue.revealed .clue-number {
+      animation: numberPop 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    @keyframes numberPop {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.3) rotate(10deg); }
     }
 
     .clue-title {
-      font-weight: 600;
-      font-size: 0.95rem;
+      font-weight: 700;
+      font-size: 1.05rem;
+      letter-spacing: 0.3px;
     }
 
     .clue-content {
       display: none;
-      margin-top: 0.8rem;
-      padding-top: 0.8rem;
-      border-top: 1px dashed rgba(77,166,255,0.3);
+      margin-top: 1rem;
+      padding-top: 1rem;
+      border-top: 2px dashed rgba(77,166,255,0.3);
       text-align: left;
-      font-size: 0.9rem;
-      line-height: 1.6;
+      font-size: 0.95rem;
+      line-height: 1.7;
     }
 
     .clue.revealed .clue-content {
       display: block;
-      animation: slideDown 0.5s ease;
+      animation: contentSlide 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
     }
 
-    @keyframes slideDown {
-      from { opacity: 0; transform: translateY(-10px); }
+    @keyframes contentSlide {
+      from { opacity: 0; transform: translateY(-20px); }
       to { opacity: 1; transform: translateY(0); }
     }
 
-    /* Botón final */
+    /* Botón mejorado */
     button {
-      margin-top: 1rem;
+      margin-top: 0.5rem;
       border: none;
-      padding: 14px 32px; /* Padding ajustado */
+      padding: 16px 40px;
       border-radius: 50px;
-      font-size: 0.95rem;
+      font-size: 1.05rem;
       font-weight: 800;
       cursor: pointer;
       color: #000;
       background: linear-gradient(135deg, #4da6ff, #1e90ff);
-      box-shadow: 0 10px 25px rgba(77,166,255,0.5);
-      transition: all 0.35s ease;
+      box-shadow: 0 10px 30px rgba(77,166,255,0.4);
+      transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
       letter-spacing: 0.5px;
-      opacity: 0.4;
+      opacity: 0.3;
       pointer-events: none;
-      width: 100%; /* Botón full width en móvil */
-      max-width: 280px;
+      width: 100%;
+      max-width: 300px;
       -webkit-tap-highlight-color: transparent;
+      position: relative;
+      overflow: hidden;
+    }
+
+    button::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+      transform: translateX(-100%);
+      transition: transform 0.6s ease;
     }
 
     button.active {
       opacity: 1;
       pointer-events: auto;
-      animation: glow 2s ease-in-out infinite;
+      animation: buttonPulse 1.5s ease-in-out infinite;
+      transform: scale(1);
+    }
+    
+    @keyframes buttonPulse {
+      0%, 100% { 
+        transform: scale(1);
+        box-shadow: 0 10px 30px rgba(77,166,255,0.4);
+      }
+      50% { 
+        transform: scale(1.08);
+        box-shadow: 0 15px 60px rgba(77,166,255,0.8), 0 0 40px rgba(77,166,255,0.6);
+      }
     }
 
-    @keyframes glow {
-      0%, 100% { box-shadow: 0 10px 25px rgba(77,166,255,0.5); }
-      50% { box-shadow: 0 10px 40px rgba(77,166,255,0.8); }
+    button.active:hover::before {
+      transform: translateX(100%);
+    }
+
+    @keyframes buttonGlow {
+      0%, 100% { 
+        box-shadow: 0 10px 30px rgba(77,166,255,0.4);
+      }
+      50% { 
+        box-shadow: 0 10px 50px rgba(77,166,255,0.8), 0 0 30px rgba(77,166,255,0.5);
+      }
     }
 
     button:active {
-      transform: scale(0.97); /* Feedback táctil */
+      transform: scale(0.98);
     }
 
-    /* Revelación final */
+    /* Revelación final mejorada */
     .reveal-container {
       display: none;
-      margin-top: 1.5rem;
-      animation: reveal 1s ease forwards;
+      margin-top: 2rem;
     }
 
     .reveal-container.show {
       display: block;
+      animation: revealEntry 1s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
     }
 
-    @keyframes reveal {
-      from { opacity: 0; transform: scale(0.9); }
-      to { opacity: 1; transform: scale(1); }
+    @keyframes revealEntry {
+      0% { opacity: 0; transform: scale(0.8) translateY(30px); }
+      100% { opacity: 1; transform: scale(1) translateY(0); }
     }
 
+    .ticket {
+      margin-bottom: 2rem;
+      padding: 2rem 1.4rem;
+      border-radius: 22px;
+      background: linear-gradient(135deg, rgba(0,0,0,0.7) 0%, rgba(10,20,40,0.8) 100%);
+      border: 3px dashed #4da6ff;
+      box-shadow: 
+        0 15px 40px rgba(0,0,0,0.8),
+        inset 0 0 40px rgba(77,166,255,0.1);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .ticket::before {
+      content: "";
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: linear-gradient(45deg, transparent, rgba(77,166,255,0.1), transparent);
+      animation: ticketShine 3s linear infinite;
+    }
+
+    @keyframes ticketShine {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    .lock-icon {
+      font-size: 3.5rem;
+      margin-bottom: 1rem;
+      animation: unlockAnim 1s ease-out;
+      filter: drop-shadow(0 0 20px rgba(255,215,0,0.8));
+    }
+
+    @keyframes unlockAnim {
+      0% { transform: scale(0) rotate(-180deg); }
+      60% { transform: scale(1.2) rotate(20deg); }
+      100% { transform: scale(1) rotate(0deg); }
+    }
+
+    .ticket h2 {
+      color: #4da6ff;
+      margin-bottom: 1.2rem;
+      letter-spacing: 1px;
+      font-size: 1.4rem;
+      text-shadow: 0 0 20px rgba(77,166,255,0.5);
+      position: relative;
+      z-index: 1;
+    }
+
+    .ticket p {
+      margin-bottom: 0;
+      font-size: 1rem;
+      line-height: 1.9;
+      position: relative;
+      z-index: 1;
+    }
+
+    .ticket strong {
+      color: #fff;
+      font-size: 1.15rem;
+      display: block;
+      margin-bottom: 1rem;
+      text-shadow: 0 2px 10px rgba(255,255,255,0.3);
+    }
+
+    /* Galería mejorada */
     .gallery {
       display: grid;
-      grid-template-columns: repeat(2, 1fr); /* 2 columnas fijas en móvil */
-      gap: 0.6rem;
-      margin: 1.2rem 0;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 0.8rem;
+      margin: 1.5rem 0;
     }
 
     .gallery img {
       width: 100%;
-      height: 110px; /* Altura reducida */
+      height: 130px;
       object-fit: cover;
-      border-radius: 12px;
-      box-shadow: 0 8px 20px rgba(0,0,0,0.55);
-      transition: transform 0.3s ease;
-      filter: brightness(0.85);
-      animation: imgReveal 0.8s ease forwards;
+      border-radius: 16px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.7);
+      transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+      filter: brightness(0.85) saturate(1.1);
+      cursor: pointer;
       opacity: 0;
-      cursor: pointer; /* Indicador visual de que las imágenes son clickeables */
+      animation: imgReveal 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+      border: 2px solid rgba(77,166,255,0.2);
+    }
+
+    .gallery img:hover {
+      transform: scale(1.05) translateY(-5px);
+      filter: brightness(1) saturate(1.3);
+      box-shadow: 0 15px 40px rgba(77,166,255,0.4);
+      border-color: #4da6ff;
     }
 
     .gallery img:active {
@@ -313,84 +544,60 @@
     .gallery img:nth-child(6) { animation-delay: 0.6s; }
 
     @keyframes imgReveal {
-      from { opacity: 0; transform: scale(0.85); }
-      to { opacity: 1; transform: scale(1); }
-    }
-
-    .ticket {
-      margin-top: 1.5rem;
-      padding: 1.4rem 1rem; /* Padding ajustado */
-      border-radius: 18px;
-      background: rgba(0,0,0,0.6);
-      border: 2px dashed #4da6ff;
-    }
-
-    .ticket h2 {
-      color: #4da6ff;
-      margin-bottom: 0.8rem;
-      letter-spacing: 0.5px;
-      font-size: 1.2rem; /* Tamaño reducido */
-    }
-
-    .ticket p {
-      margin-bottom: 0;
-      font-size: 0.9rem;
-      line-height: 1.7;
+      from { opacity: 0; transform: scale(0.7) translateY(30px); }
+      to { opacity: 1; transform: scale(1) translateY(0); }
     }
 
     .footer {
-      margin-top: 1.5rem;
-      font-size: 0.85rem;
-      opacity: 0.85;
+      margin-top: 2rem;
+      font-size: 0.95rem;
+      opacity: 0.8;
       font-style: italic;
       padding-bottom: 0.5rem;
+      background: linear-gradient(90deg, #4da6ff, #ff77cc);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      font-weight: 600;
     }
 
+    /* Emojis flotantes mejorados */
     .emoji {
       position: fixed;
-      font-size: 22px; /* Tamaño reducido */
-      animation: float 6s linear infinite;
+      font-size: 26px;
+      animation: emojiFloat 7s linear infinite;
       pointer-events: none;
       z-index: 100;
+      filter: drop-shadow(0 0 10px rgba(255,255,255,0.5));
     }
 
-    @keyframes float {
-      0% { transform: translateY(0); opacity: 0; }
-      15% { opacity: 1; }
-      100% { transform: translateY(-130vh); opacity: 0; }
+    @keyframes emojiFloat {
+      0% { transform: translateY(0) rotate(0deg); opacity: 0; }
+      10% { opacity: 1; }
+      90% { opacity: 1; }
+      100% { transform: translateY(-150vh) rotate(360deg); opacity: 0; }
     }
 
-    .lock-icon {
-      font-size: 2.5rem; /* Tamaño reducido */
-      margin-bottom: 0.8rem;
-      animation: shake 0.5s ease-in-out;
-    }
-
-    @keyframes shake {
-      0%, 100% { transform: rotate(0); }
-      25% { transform: rotate(-10deg); }
-      75% { transform: rotate(10deg); }
-    }
-
-    /* Lightbox para ampliar imágenes */
+    /* Lightbox mejorado */
     .lightbox {
       display: none;
       position: fixed;
       inset: 0;
-      background: rgba(0, 0, 0, 0.95);
+      background: rgba(0, 0, 0, 0.97);
       z-index: 1000;
       justify-content: center;
       align-items: center;
       padding: 1rem;
       -webkit-tap-highlight-color: transparent;
+      backdrop-filter: blur(10px);
     }
 
     .lightbox.active {
       display: flex;
-      animation: fadeInLightbox 0.3s ease;
+      animation: lightboxFade 0.4s ease;
     }
 
-    @keyframes fadeInLightbox {
+    @keyframes lightboxFade {
       from { opacity: 0; }
       to { opacity: 1; }
     }
@@ -408,52 +615,61 @@
       max-width: 100%;
       max-height: 80vh;
       object-fit: contain;
-      border-radius: 12px;
-      box-shadow: 0 10px 40px rgba(0,0,0,0.8);
-      animation: zoomIn 0.3s ease;
+      border-radius: 16px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.9);
+      animation: imgZoom 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+      transition: opacity 0.3s ease;
+      border: 2px solid rgba(77,166,255,0.3);
     }
 
-    @keyframes zoomIn {
-      from { transform: scale(0.8); opacity: 0; }
+    @keyframes imgZoom {
+      from { transform: scale(0.7); opacity: 0; }
       to { transform: scale(1); opacity: 1; }
     }
 
     .lightbox-close {
       position: absolute;
-      top: -45px;
+      top: -50px;
       right: 0;
-      background: rgba(255,255,255,0.15);
-      border: none;
+      background: rgba(77,166,255,0.2);
+      border: 2px solid rgba(77,166,255,0.4);
       color: #fff;
       font-size: 1.5rem;
-      width: 40px;
-      height: 40px;
+      width: 45px;
+      height: 45px;
       border-radius: 50%;
       cursor: pointer;
       display: flex;
       align-items: center;
       justify-content: center;
-      transition: background 0.3s ease;
+      transition: all 0.3s ease;
+      backdrop-filter: blur(10px);
+    }
+
+    .lightbox-close:hover {
+      background: rgba(255,77,77,0.3);
+      border-color: rgba(255,77,77,0.6);
+      transform: rotate(90deg);
     }
 
     .lightbox-close:active {
-      background: rgba(255,255,255,0.3);
+      transform: scale(0.9) rotate(90deg);
     }
 
     .lightbox-nav {
       display: flex;
       gap: 1rem;
-      margin-top: 1rem;
+      margin-top: 1.2rem;
     }
 
     .lightbox-nav button {
-      background: rgba(77,166,255,0.3);
-      border: 1px solid rgba(77,166,255,0.5);
+      background: rgba(77,166,255,0.25);
+      border: 2px solid rgba(77,166,255,0.5);
       color: #fff;
-      padding: 10px 20px;
-      border-radius: 25px;
-      font-size: 0.9rem;
-      font-weight: 600;
+      padding: 12px 24px;
+      border-radius: 30px;
+      font-size: 0.95rem;
+      font-weight: 700;
       cursor: pointer;
       transition: all 0.3s ease;
       opacity: 1;
@@ -461,21 +677,30 @@
       width: auto;
       max-width: none;
       animation: none;
-      box-shadow: none;
+      box-shadow: 0 5px 20px rgba(77,166,255,0.3);
+      backdrop-filter: blur(10px);
+    }
+
+    .lightbox-nav button:hover {
+      background: rgba(77,166,255,0.4);
+      border-color: #4da6ff;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(77,166,255,0.5);
     }
 
     .lightbox-nav button:active {
-      background: rgba(77,166,255,0.5);
       transform: scale(0.95);
     }
 
     .lightbox-counter {
-      color: rgba(255,255,255,0.7);
-      font-size: 0.85rem;
-      margin-top: 0.8rem;
+      color: rgba(255,255,255,0.8);
+      font-size: 0.9rem;
+      margin-top: 1rem;
+      font-weight: 600;
+      text-shadow: 0 2px 10px rgba(0,0,0,0.8);
     }
 
-    /* Media query para pantallas más grandes (tablets/desktop) */
+    /* Media queries */
     @media (min-width: 480px) {
       body {
         padding: 1.5rem;
@@ -483,8 +708,8 @@
       }
 
       .container {
-        max-width: 500px;
-        border-radius: 30px;
+        max-width: 520px;
+        border-radius: 32px;
       }
 
       .hero {
@@ -492,25 +717,25 @@
       }
 
       .hero-text h1 {
-        font-size: 2rem;
+        font-size: 2.2rem;
       }
 
       .content {
-        padding: 2rem;
+        padding: 2.5rem 2rem;
       }
 
       .gallery {
         grid-template-columns: repeat(3, 1fr);
-        gap: 0.8rem;
+        gap: 1rem;
       }
 
       .gallery img {
-        height: 130px;
+        height: 150px;
       }
 
       button {
         width: auto;
-        padding: 15px 44px;
+        padding: 18px 50px;
       }
     }
   </style>
@@ -518,11 +743,14 @@
 
 <body>
 
-  <!-- Modal lightbox para ampliar imágenes -->
+  <!-- Partículas de fondo -->
+  <div class="particles" id="particles"></div>
+
+  <!-- Lightbox -->
   <div class="lightbox" id="lightbox" onclick="closeLightbox(event)">
     <div class="lightbox-content" onclick="event.stopPropagation()">
       <button class="lightbox-close" onclick="closeLightbox()">&times;</button>
-      <img class="lightbox-img" id="lightbox-img" src="/placeholder.svg" alt="Imagen ampliada">
+      <img class="lightbox-img" id="lightbox-img" src="" alt="Imagen ampliada">
       <div class="lightbox-nav">
         <button onclick="prevImage()">&#8592; Anterior</button>
         <button onclick="nextImage()">Siguiente &#8594;</button>
@@ -536,26 +764,21 @@
   <div class="container">
 
     <div class="hero">
-      <div class="mystery-icons">
-        <span>❓</span>
-        <span>🎁</span>
-        <span>❓</span>
-      </div>
       <div class="hero-text">
-        <h1>Un secreto te espera…</h1>
-        <span>¿Te atreves a descubrirlo? 💙</span>
+        <h1>✨ Algo Especial Te Espera ✨</h1>
+        <span>Haz clic en cada pista para descubrirlo 💙</span>
       </div>
     </div>
 
+
     <div class="content">
-      <p>
-        No todo debe explicarse…<br>
-        Algunas cosas solo deben <span class="highlight">vivirse</span>.<br><br>
-        Descubre las pistas para revelar el secreto 🔮
+      <p class="intro-text">
+        Tengo algo <span class="highlight">muy especial</span> planeado para nosotros…<br><br>
+        <strong>🔍 Descubre las 3 pistas</strong> y revela la sorpresa 🎁✨
       </p>
 
       <div class="progress-container">
-        <div class="progress-text">Pistas descubiertas: <span id="progress-count">0</span>/3</div>
+        <div class="progress-text">PISTAS DESCUBIERTAS: <span id="progress-count">0</span>/3</div>
         <div class="progress-bar">
           <div class="progress-fill" id="progress-fill"></div>
         </div>
@@ -565,51 +788,52 @@
         <div class="clue" onclick="revealClue(1)">
           <div class="clue-header">
             <div class="clue-number">1</div>
-            <div class="clue-title">📅 ¿Cuándo?</div>
+            <div class="clue-title">📅 Primera Pista</div>
           </div>
           <div class="clue-content" id="clue-1">
-            <strong>24 de enero</strong><br>
-            Una fecha especial nos espera… marca tu calendario 💙
+            <strong>📆 Viernes 24 de enero de 2026</strong><br>
+            Una fecha marcada en el calendario… un día especial que será solo nuestro 💙✨
           </div>
         </div>
 
         <div class="clue" onclick="revealClue(2)">
           <div class="clue-header">
             <div class="clue-number">2</div>
-            <div class="clue-title">👥 ¿Quiénes?</div>
+            <div class="clue-title">👥 Segunda Pista</div>
           </div>
           <div class="clue-content" id="clue-2">
-            <strong>Dos personas</strong><br>
-            Tú y yo… juntos en una aventura que será solo nuestra ✨
+            <strong>👫 Nosotros dos</strong><br>
+            Tú y yo… Juntos en una aventura llena de emoción, risas y recuerdos inolvidables 🌟
           </div>
         </div>
 
         <div class="clue" onclick="revealClue(3)">
           <div class="clue-header">
             <div class="clue-number">3</div>
-            <div class="clue-title">🔊 ¿Una pista más?</div>
+            <div class="clue-title">🔊 Tercera Pista</div>
           </div>
           <div class="clue-content" id="clue-3">
-            <strong>Motores, velocidad, emoción…</strong><br>
-            Algo que acelera el corazón nos espera 🏁
+            <strong>🏎️ Motores, velocidad y pura adrenalina</strong><br>
+            Autos increíbles, exhibiciones espectaculares y una experiencia que acelerará nuestros corazones 🏁🔥
           </div>
         </div>
       </div>
 
       <button id="reveal-btn" onclick="showFinalReveal()">
-        🔐 Revelar el secreto
+        🔐 Revelar el Secreto
       </button>
 
       <div class="reveal-container" id="reveal-container">
         <div class="ticket">
           <div class="lock-icon">🎉</div>
-          <h2>¡Secreto revelado! 💙</h2>
+          <h2>¡SORPRESA REVELADA! 💙✨</h2>
           <p>
-            <strong>NOS VAMOS PARA MOTOR CAR MOVEMENT SHOW 2026</strong><br><br>
-            📅 24 de enero<br><br>
-            Emociones, miradas cómplices,<br>
-            fotos juntos…<br>
-            y un recuerdo que será solo nuestro 💙
+            <strong>🏁 ¡NOS VAMOS AL MOTOR CAR MOVEMENT SHOW! 🏁</strong><br><br>
+            📅 <strong>Viernes 24 de enero de 2026</strong><br>
+            📍 <strong>Corferias - Bogotá</strong><br><br>
+            Un día increíble juntos disfrutando de:<br>
+            🏎️ Autos espectaculares · 📸 Muchas fotos · 💙 Momentos únicos<br><br>
+            <strong style="color: #4da6ff; font-size: 1.3rem;">¡Va a ser épico! 🚗💨✨</strong>
           </p>
         </div>
 
@@ -624,16 +848,29 @@
       </div>
 
       <div class="footer">
-        Para la princesa que hace especial cada aventura 💙
+        Para mi princesa que hace especial cada momento 💙✨
       </div>
     </div>
 
   </div>
 
   <script>
+    // Crear partículas de fondo
+    function createParticles() {
+      const particles = document.getElementById('particles');
+      for (let i = 0; i < 20; i++) {
+        const particle = document.createElement('div');
+        particle.className = 'particle';
+        particle.style.left = Math.random() * 100 + '%';
+        particle.style.animationDelay = Math.random() * 15 + 's';
+        particle.style.animationDuration = (Math.random() * 10 + 10) + 's';
+        particles.appendChild(particle);
+      }
+    }
+    createParticles();
+
     let cluesRevealed = 0;
     const totalClues = 3;
-    
     let currentImageIndex = 0;
     let galleryImages = [];
 
@@ -698,14 +935,18 @@
       document.getElementById('progress-count').textContent = cluesRevealed;
       document.getElementById('progress-fill').style.width = `${(cluesRevealed / totalClues) * 100}%`;
       
-      for (let i = 0; i < 5; i++) {
-        setTimeout(() => createEmoji(), i * 100);
+      // Crear emojis al revelar pista
+      for (let i = 0; i < 8; i++) {
+        setTimeout(() => createEmoji(), i * 80);
       }
       
       if (cluesRevealed === totalClues) {
         const btn = document.getElementById('reveal-btn');
-        btn.classList.add('active');
-        btn.innerHTML = '🔓 Revelar el secreto';
+        setTimeout(() => {
+          btn.classList.add('active');
+          btn.innerHTML = '✨ ¡REVELAR LA SORPRESA! ✨';
+          btn.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }, 600);
       }
     }
 
@@ -719,26 +960,28 @@
       
       setTimeout(() => {
         revealContainer.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        initGallery(); // Inicializar lightbox después de mostrar galería
+        initGallery();
       }, 300);
       
-      for (let i = 0; i < 30; i++) {
-        setTimeout(() => createEmoji(), i * 100);
+      // Celebración con muchos emojis
+      for (let i = 0; i < 40; i++) {
+        setTimeout(() => createEmoji(), i * 80);
       }
     }
 
     function createEmoji() {
       const emoji = document.createElement('div');
       emoji.className = 'emoji';
-      const emojis = ['🚗', '🔥', '🏁', '✨', '💙', '🎉', '⭐'];
+      const emojis = ['🚗', '🏎️', '🔥', '🏁', '✨', '💙', '🎉', '⭐', '💨', '🎊'];
       emoji.innerHTML = emojis[Math.floor(Math.random() * emojis.length)];
       emoji.style.left = Math.random() * 100 + '%';
       emoji.style.bottom = '0';
-      emoji.style.animationDuration = (Math.random() * 3 + 4) + 's';
+      emoji.style.animationDuration = (Math.random() * 3 + 5) + 's';
       document.body.appendChild(emoji);
-      setTimeout(() => emoji.remove(), 6000);
+      setTimeout(() => emoji.remove(), 7000);
     }
 
+    // Navegación con teclado en lightbox
     document.addEventListener('keydown', (e) => {
       const lightbox = document.getElementById('lightbox');
       if (!lightbox.classList.contains('active')) return;
