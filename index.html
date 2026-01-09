@@ -116,6 +116,17 @@
       color: #7f8c8d;
       text-align: center;
     }
+
+    .mensaje-exito {
+      background: #d4edda;
+      border: 1px solid #c3e6cb;
+      color: #155724;
+      padding: 12px;
+      border-radius: 8px;
+      margin-top: 15px;
+      text-align: center;
+      display: none;
+    }
   </style>
 </head>
 <body>
@@ -157,8 +168,8 @@
         Las cláusulas no son castigos. Son acuerdos claros para evitar que el error se repita.
       </p>
       <ul>
-        <li>“La Parte A se compromete a comunicar lo que siente antes de guardar silencio.”</li>
-        <li>“La Parte A respetará el espacio emocional cuando la Parte B lo necesite.”</li>
+        <li>"La Parte A se compromete a comunicar lo que siente antes de guardar silencio."</li>
+        <li>"La Parte A respetará el espacio emocional cuando la Parte B lo necesite."</li>
       </ul>
     </div>
 
@@ -175,11 +186,11 @@
 
     <div class="firmas">
       <p><strong>Firma Parte A</strong></p>
-      <input type="text" id="firmaA">
+      <input type="text" id="firmaA" placeholder="Nombre completo">
       <div class="linea"></div>
 
       <p><strong>Firma Parte B</strong></p>
-      <input type="text" id="firmaB">
+      <input type="text" id="firmaB" placeholder="Nombre completo">
       <div class="linea"></div>
     </div>
 
@@ -187,37 +198,30 @@
       Este contrato entra en vigor desde el momento en que se lee con honestidad.
     </div>
 
-    <!-- BOTÓN PDF -->
     <button onclick="guardarPDF()">📥 Guardar contrato en PDF</button>
+    <div class="mensaje-exito" id="mensajeExito">✅ PDF generado exitosamente</div>
   </div>
 
   <script>
     const clausulasDiv = document.getElementById("clausulas");
+    let contratoData = {
+      fecha: "",
+      firmaA: "",
+      firmaB: "",
+      clausulas: []
+    };
 
     function guardar() {
-      const data = {
-        fecha: fecha.value,
-        firmaA: firmaA.value,
-        firmaB: firmaB.value,
-        clausulas: [...document.querySelectorAll(".clausula textarea")].map(t => t.value)
-      };
-      localStorage.setItem("contratoRedencion", JSON.stringify(data));
-    }
-
-    function cargar() {
-      const data = JSON.parse(localStorage.getItem("contratoRedencion"));
-      if (!data) return;
-
-      fecha.value = data.fecha || "";
-      firmaA.value = data.firmaA || "";
-      firmaB.value = data.firmaB || "";
-      data.clausulas.forEach(texto => agregarClausula(texto));
+      contratoData.fecha = fecha.value;
+      contratoData.firmaA = firmaA.value;
+      contratoData.firmaB = firmaB.value;
+      contratoData.clausulas = [...document.querySelectorAll(".clausula textarea")].map(t => t.value);
     }
 
     function agregarClausula(texto = "") {
       const div = document.createElement("div");
       div.className = "clausula";
-      div.innerHTML = `<textarea rows="2">${texto}</textarea>`;
+      div.innerHTML = `<textarea rows="2" placeholder="Escribe una cláusula...">${texto}</textarea>`;
       clausulasDiv.appendChild(div);
       div.querySelector("textarea").addEventListener("input", guardar);
       guardar();
@@ -228,21 +232,170 @@
     });
 
     function guardarPDF() {
+      guardar();
+      
       const { jsPDF } = window.jspdf;
       const pdf = new jsPDF("p", "mm", "a4");
-
-      pdf.html(document.getElementById("contenido"), {
-        x: 10,
-        y: 10,
-        width: 190,
-        windowWidth: 800,
-        callback: function (doc) {
-          doc.save("Contrato_Redencion_Emocional.pdf");
-        }
+      
+      let y = 20;
+      const margen = 20;
+      const anchoUtil = 170;
+      
+      // Título
+      pdf.setFontSize(18);
+      pdf.setFont(undefined, "bold");
+      pdf.text("Contrato de Redención Emocional", 105, y, { align: "center" });
+      
+      y += 8;
+      pdf.setFontSize(10);
+      pdf.setFont(undefined, "normal");
+      pdf.setTextColor(128, 128, 128);
+      pdf.text("Documento no legal, pero emocionalmente sincero", 105, y, { align: "center" });
+      
+      y += 15;
+      pdf.setTextColor(0, 0, 0);
+      
+      // Entre
+      pdf.setFontSize(11);
+      pdf.setFont(undefined, "bold");
+      pdf.text("Entre:", margen, y);
+      
+      y += 7;
+      pdf.setFont(undefined, "normal");
+      pdf.text("La Parte A: Yo, quien se equivocó.", margen, y);
+      
+      y += 6;
+      pdf.text("La Parte B: Tú, quien tuvo toda la razón.", margen, y);
+      
+      y += 10;
+      pdf.setFont(undefined, "bold");
+      pdf.text("Fecha: ", margen, y);
+      pdf.setFont(undefined, "normal");
+      pdf.text(contratoData.fecha || "_____________________", margen + 15, y);
+      
+      // Línea separadora
+      y += 8;
+      pdf.setDrawColor(224, 224, 224);
+      pdf.line(margen, y, margen + anchoUtil, y);
+      
+      // Antecedentes
+      y += 10;
+      pdf.setFont(undefined, "bold");
+      pdf.text("ANTECEDENTES", margen, y);
+      
+      y += 7;
+      pdf.setFont(undefined, "normal");
+      const textoAntecedentes = [
+        "La Parte A reconoce que cometió un error real, sin excusas, sin minimizarlo",
+        "y sin responsabilizar a terceros o circunstancias.",
+        "",
+        "La Parte B podrá establecer las cláusulas que considere necesarias como",
+        "condición para evaluar el perdón."
+      ];
+      
+      textoAntecedentes.forEach(linea => {
+        pdf.text(linea, margen, y);
+        y += 5;
       });
+      
+      // Línea separadora
+      y += 3;
+      pdf.line(margen, y, margen + anchoUtil, y);
+      
+      // Cláusulas
+      y += 10;
+      pdf.setFont(undefined, "bold");
+      pdf.text("CLÁUSULAS", margen, y);
+      
+      y += 7;
+      pdf.setFont(undefined, "normal");
+      
+      if (contratoData.clausulas.length === 0 || contratoData.clausulas.every(c => !c.trim())) {
+        pdf.setTextColor(128, 128, 128);
+        pdf.text("(No se han definido cláusulas)", margen, y);
+        pdf.setTextColor(0, 0, 0);
+        y += 7;
+      } else {
+        contratoData.clausulas.forEach((clausula, index) => {
+          if (clausula.trim()) {
+            pdf.setFont(undefined, "bold");
+            pdf.text(`Cláusula ${index + 1}:`, margen, y);
+            y += 6;
+            
+            pdf.setFont(undefined, "normal");
+            const lineasClausula = pdf.splitTextToSize(clausula, anchoUtil - 5);
+            lineasClausula.forEach(linea => {
+              if (y > 270) {
+                pdf.addPage();
+                y = 20;
+              }
+              pdf.text(linea, margen + 5, y);
+              y += 5;
+            });
+            y += 3;
+          }
+        });
+      }
+      
+      // Verificar si necesitamos nueva página
+      if (y > 240) {
+        pdf.addPage();
+        y = 20;
+      }
+      
+      // Línea separadora
+      y += 5;
+      pdf.line(margen, y, margen + anchoUtil, y);
+      
+      // Disposiciones finales
+      y += 10;
+      pdf.setFont(undefined, "bold");
+      pdf.text("DISPOSICIONES FINALES", margen, y);
+      
+      y += 7;
+      pdf.setFont(undefined, "normal");
+      pdf.text("La Parte A reafirma su compromiso de demostrar con hechos,", margen, y);
+      y += 5;
+      pdf.text("paciencia y respeto.", margen, y);
+      
+      // Firmas
+      y += 20;
+      pdf.setFont(undefined, "bold");
+      pdf.text("Firma Parte A", margen, y);
+      y += 7;
+      pdf.setFont(undefined, "normal");
+      pdf.text(contratoData.firmaA || "________________________", margen, y);
+      y += 2;
+      pdf.line(margen, y, margen + 70, y);
+      
+      y += 15;
+      pdf.setFont(undefined, "bold");
+      pdf.text("Firma Parte B", margen, y);
+      y += 7;
+      pdf.setFont(undefined, "normal");
+      pdf.text(contratoData.firmaB || "________________________", margen, y);
+      y += 2;
+      pdf.line(margen, y, margen + 70, y);
+      
+      // Nota final
+      y += 15;
+      pdf.setFontSize(9);
+      pdf.setTextColor(128, 128, 128);
+      pdf.text("Este contrato entra en vigor desde el momento en que se lee con honestidad.", 105, y, { align: "center" });
+      
+      // Guardar PDF
+      pdf.save("Contrato_Redencion_Emocional.pdf");
+      
+      // Mostrar mensaje de éxito
+      const mensaje = document.getElementById("mensajeExito");
+      mensaje.style.display = "block";
+      setTimeout(() => {
+        mensaje.style.display = "none";
+      }, 3000);
     }
 
-    cargar();
+    // Inicializar con una cláusula vacía
+    agregarClausula();
   </script>
 
 </body>
