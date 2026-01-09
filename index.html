@@ -100,17 +100,26 @@
     <hr>
 
     <p><strong>ANTECEDENTES</strong></p>
-    <textarea id="antecedentes" rows="3"
-      placeholder="Describe aquí lo que ocurrió..."></textarea>
+    <p>
+      La Parte A reconoce que cometió un error real, sin excusas, sin minimizarlo y sin
+      responsabilizar a terceros, circunstancias o silencios mal manejados.
+    </p>
+    <p>
+      La Parte B podrá establecer las cláusulas que considere necesarias como condición
+      para evaluar la posibilidad del perdón.
+    </p>
 
-    <p><strong>CLÁUSULAS (escribe las que quieras)</strong></p>
+    <p><strong>CLÁUSULAS (añade las que quieras)</strong></p>
     <div id="clausulas"></div>
 
     <button onclick="agregarClausula()">➕ Añadir cláusula</button>
 
     <p><strong>DISPOSICIONES FINALES</strong></p>
-    <textarea id="finales" rows="3"
-      placeholder="Condiciones finales..."></textarea>
+    <p>
+      El perdón no es obligatorio.<br>
+      El tiempo no se reclama.<br>
+      La sinceridad es permanente.
+    </p>
 
     <div class="firmas">
       <p><strong>Firma Parte A</strong></p>
@@ -133,8 +142,6 @@
     function guardar() {
       const data = {
         fecha: fecha.value,
-        antecedentes: antecedentes.value,
-        finales: finales.value,
         firmaA: firmaA.value,
         firmaB: firmaB.value,
         clausulas: [...document.querySelectorAll(".clausula textarea")].map(t => t.value)
@@ -147,14 +154,10 @@
       if (!data) return;
 
       fecha.value = data.fecha || "";
-      antecedentes.value = data.antecedentes || "";
-      finales.value = data.finales || "";
       firmaA.value = data.firmaA || "";
       firmaB.value = data.firmaB || "";
 
-      data.clausulas.forEach(texto => {
-        agregarClausula(texto);
-      });
+      data.clausulas.forEach(texto => agregarClausula(texto));
     }
 
     function agregarClausula(texto = "") {
@@ -168,7 +171,7 @@
       guardar();
     }
 
-    document.querySelectorAll("input, textarea").forEach(el => {
+    document.querySelectorAll("input").forEach(el => {
       el.addEventListener("input", guardar);
     });
 
