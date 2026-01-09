@@ -3,196 +3,135 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>💙 Para ti</title>
+  <title>Contrato de Redención Emocional</title>
 
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
-
-    * {
-      box-sizing: border-box;
-    }
-
     body {
-      font-family: 'Poppins', sans-serif;
-      background: radial-gradient(circle at top, #e3f2fd, #90caf9);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
+      font-family: Arial, sans-serif;
+      background: #f4f6f8;
       margin: 0;
-      overflow: hidden;
+      padding: 20px;
+      color: #2c3e50;
     }
 
-    .card {
+    .contrato {
       background: white;
-      width: 92%;
-      max-width: 380px;
-      padding: 30px 22px 40px;
-      border-radius: 26px;
-      text-align: center;
-      box-shadow: 0 20px 40px rgba(33,150,243,0.35);
-      position: relative;
-      z-index: 2;
-      animation: aparecer 1s ease;
-    }
-
-    @keyframes aparecer {
-      from { transform: scale(0.9); opacity: 0; }
-      to { transform: scale(1); opacity: 1; }
+      max-width: 700px;
+      margin: auto;
+      padding: 30px 25px;
+      border-radius: 16px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.15);
     }
 
     h1 {
-      font-size: 26px;
-      margin-bottom: 18px;
-      color: #0d47a1;
+      text-align: center;
+      margin-bottom: 10px;
     }
 
-    .botones {
-      display: flex;
-      justify-content: center;
-      gap: 16px;
-      flex-wrap: wrap;
-      margin-top: 10px;
+    .subtitulo {
+      text-align: center;
+      font-size: 14px;
+      color: #7f8c8d;
+      margin-bottom: 30px;
     }
 
-    button {
-      padding: 15px 30px;
-      font-size: 18px;
-      border: none;
-      border-radius: 50px;
-      cursor: pointer;
-      width: 130px;
-      font-weight: 600;
+    p {
+      line-height: 1.6;
+      margin-bottom: 15px;
     }
 
-    #si {
-      background: linear-gradient(135deg, #2196f3, #1976d2);
-      color: white;
-      box-shadow: 0 8px 18px rgba(33,150,243,0.5);
-      transition: transform 0.3s;
+    ul {
+      margin-left: 20px;
     }
 
-    #no {
-      background: #e3f2fd;
-      color: #0d47a1;
-      box-shadow: inset 0 0 0 2px #bbdefb;
+    li {
+      margin-bottom: 10px;
     }
 
-    #mensaje {
-      margin-top: 22px;
-      min-height: 30px;
-      font-size: 16px;
-      color: #1565c0;
-      font-weight: 600;
-      animation: fade 0.5s ease;
+    .firmas {
+      margin-top: 40px;
     }
 
-    @keyframes fade {
-      from { opacity: 0; }
-      to { opacity: 1; }
+    .firma {
+      margin-top: 25px;
     }
 
-    /* Corazones */
-    .heart {
-      position: absolute;
-      color: #2196f3;
-      animation: flotar linear infinite;
-      opacity: 0.85;
-      pointer-events: none;
+    .linea {
+      border-bottom: 1px solid #2c3e50;
+      width: 100%;
+      margin-top: 25px;
     }
 
-    @keyframes flotar {
-      0% {
-        transform: translateY(0) scale(0.8);
-        opacity: 0;
-      }
-      10% { opacity: 0.9; }
-      100% {
-        transform: translateY(-110vh) scale(1.6);
-        opacity: 0;
-      }
+    .nota {
+      margin-top: 25px;
+      font-size: 14px;
+      color: #7f8c8d;
+      text-align: center;
     }
   </style>
 </head>
 <body>
 
-  <div class="card">
-    <h1>¿Me perdonas? 💙</h1>
-
-    <div class="botones">
-      <button id="si" onclick="aceptar()">Sí</button>
-      <button id="no" onclick="rechazar()">No</button>
+  <div class="contrato">
+    <h1>📄 CONTRATO DE REDENCIÓN EMOCIONAL</h1>
+    <div class="subtitulo">
+      Documento no legal, pero emocionalmente vinculante
     </div>
 
-    <div id="mensaje"></div>
+    <p><strong>Entre:</strong></p>
+    <p>
+      <strong>La Parte A:</strong> Yo, quien se equivocó.<br>
+      <strong>La Parte B:</strong> Tú, quien tuvo toda la razón.
+    </p>
+
+    <p><strong>Fecha:</strong> ____ / ____ / ______</p>
+
+    <hr>
+
+    <p><strong>ANTECEDENTES</strong></p>
+    <p>
+      La Parte A reconoce que cometió un error real, sin excusas, sin minimizarlo y sin
+      responsabilizar a terceros, circunstancias o silencios mal manejados.
+    </p>
+    <p>
+      La Parte B no está obligada a perdonar, responder ni continuar esta relación.
+    </p>
+
+    <p><strong>CLÁUSULAS</strong></p>
+    <ul>
+      <li><strong>Cláusula 1 – Reconocimiento:</strong> La Parte A acepta plenamente su error y entiende por qué dolió.</li>
+      <li><strong>Cláusula 2 – Responsabilidad:</strong> La Parte A se compromete a no repetir la conducta que originó este contrato.</li>
+      <li><strong>Cláusula 3 – Escucha activa:</strong> La Parte A escuchará sin interrumpir, defenderse ni justificar.</li>
+      <li><strong>Cláusula 4 – Hechos, no promesas:</strong> La Parte A demostrará con acciones constantes que entendió.</li>
+      <li><strong>Cláusula 5 – Respeto al espacio:</strong> La Parte B puede tomar distancia sin que esto sea cuestionado.</li>
+      <li><strong>Cláusula 6 – Validez emocional:</strong> Este contrato no garantiza reconciliación, solo honestidad.</li>
+    </ul>
+
+    <p><strong>DISPOSICIONES FINALES</strong></p>
+    <p>
+      El perdón no es obligatorio.<br>
+      El tiempo no se reclama.<br>
+      La sinceridad es permanente.
+    </p>
+
+    <div class="firmas">
+      <div class="firma">
+        <p><strong>Firma Parte A</strong></p>
+        <div class="linea"></div>
+        <p>Nombre:</p>
+      </div>
+
+      <div class="firma">
+        <p><strong>Firma Parte B (opcional)</strong></p>
+        <div class="linea"></div>
+        <p>Nombre:</p>
+      </div>
+    </div>
+
+    <div class="nota">
+      Este contrato entra en vigor desde el momento en que se lee con el corazón abierto.
+    </div>
   </div>
-
-  <script>
-    let tamaño = 1;
-    let intentos = 0;
-
-    const mensajes = [
-      "¿Segura que no? 💙",
-      "El sí se está esforzando 😅",
-      "Míralo crecer solo para ti 🥺",
-      "Ya casi ocupa todo 🫣",
-      "te amoooo 💙"
-    ];
-
-    function rechazar() {
-      tamaño += 0.25;
-      intentos++;
-
-      const botonSi = document.getElementById("si");
-      botonSi.style.transform = "scale(" + tamaño + ")";
-
-      document.getElementById("mensaje").textContent =
-        mensajes[Math.min(intentos - 1, mensajes.length - 1)];
-    }
-
-    function aceptar() {
-      document.body.innerHTML = `
-        <div style="
-          background:radial-gradient(circle at top,#2196f3,#0d47a1);
-          color:white;
-          height:100vh;
-          display:flex;
-          justify-content:center;
-          align-items:center;
-          text-align:center;
-          font-family:Poppins,sans-serif;
-          padding:25px;
-        ">
-          <div style="max-width:500px; animation: aparecer 1s ease;">
-            <h1>💙 Sabía que dirías que sí 💙</h1>
-            <p style="font-size:18px; line-height:1.6; margin-top:20px;">
-              Sé que no soy perfecto, pero sí honesto con lo que siento y con lo que hago.
-              Prefiero reconocer cuando me equivoco y mejorar, antes que esconderme detrás
-              de excusas. Quiero que de mí esperes a alguien que siempre busque ser mejor,
-              por ti y por nosotros.
-              <br><br>
-              <strong>Eres la mujer de mi vida, hoy, mañana y siempre.</strong>
-            </p>
-          </div>
-        </div>
-      `;
-    }
-
-    function crearCorazon() {
-      const heart = document.createElement("div");
-      heart.className = "heart";
-      heart.innerHTML = "💙";
-      heart.style.left = Math.random() * 100 + "vw";
-      heart.style.fontSize = (14 + Math.random() * 24) + "px";
-      heart.style.animationDuration = (4 + Math.random() * 5) + "s";
-
-      document.body.appendChild(heart);
-
-      setTimeout(() => heart.remove(), 8000);
-    }
-
-    setInterval(crearCorazon, 450);
-  </script>
 
 </body>
 </html>
