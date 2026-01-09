@@ -40,25 +40,35 @@
       margin-bottom: 15px;
     }
 
-    ul {
-      margin-left: 20px;
+    textarea, input {
+      width: 100%;
+      padding: 10px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      font-size: 14px;
+      margin-top: 5px;
     }
 
-    li {
-      margin-bottom: 10px;
+    .clausula {
+      margin-bottom: 15px;
+    }
+
+    button {
+      background: #2c3e50;
+      color: white;
+      border: none;
+      padding: 10px 15px;
+      border-radius: 8px;
+      cursor: pointer;
+      margin-top: 10px;
     }
 
     .firmas {
       margin-top: 40px;
     }
 
-    .firma {
-      margin-top: 25px;
-    }
-
     .linea {
       border-bottom: 1px solid #2c3e50;
-      width: 100%;
       margin-top: 25px;
     }
 
@@ -74,9 +84,7 @@
 
   <div class="contrato">
     <h1>📄 CONTRATO DE REDENCIÓN EMOCIONAL</h1>
-    <div class="subtitulo">
-      Documento no legal, pero emocionalmente vinculante
-    </div>
+    <div class="subtitulo">Documento no legal, pero emocionalmente vinculante</div>
 
     <p><strong>Entre:</strong></p>
     <p>
@@ -84,54 +92,88 @@
       <strong>La Parte B:</strong> Tú, quien tuvo toda la razón.
     </p>
 
-    <p><strong>Fecha:</strong> ____ / ____ / ______</p>
+    <p>
+      <strong>Fecha:</strong>
+      <input type="text" id="fecha" placeholder="DD / MM / AAAA">
+    </p>
 
     <hr>
 
     <p><strong>ANTECEDENTES</strong></p>
-    <p>
-      La Parte A reconoce que cometió un error real, sin excusas, sin minimizarlo y sin
-      responsabilizar a terceros, circunstancias o silencios mal manejados.
-    </p>
-    <p>
-      La Parte B no está obligada a perdonar, responder ni continuar esta relación.
-    </p>
+    <textarea id="antecedentes" rows="3"
+      placeholder="Describe aquí lo que ocurrió..."></textarea>
 
-    <p><strong>CLÁUSULAS</strong></p>
-    <ul>
-      <li><strong>Cláusula 1 – Reconocimiento:</strong> La Parte A acepta plenamente su error y entiende por qué dolió.</li>
-      <li><strong>Cláusula 2 – Responsabilidad:</strong> La Parte A se compromete a no repetir la conducta que originó este contrato.</li>
-      <li><strong>Cláusula 3 – Escucha activa:</strong> La Parte A escuchará sin interrumpir, defenderse ni justificar.</li>
-      <li><strong>Cláusula 4 – Hechos, no promesas:</strong> La Parte A demostrará con acciones constantes que entendió.</li>
-      <li><strong>Cláusula 5 – Respeto al espacio:</strong> La Parte B puede tomar distancia sin que esto sea cuestionado.</li>
-      <li><strong>Cláusula 6 – Validez emocional:</strong> Este contrato no garantiza reconciliación, solo honestidad.</li>
-    </ul>
+    <p><strong>CLÁUSULAS (escribe las que quieras)</strong></p>
+    <div id="clausulas"></div>
+
+    <button onclick="agregarClausula()">➕ Añadir cláusula</button>
 
     <p><strong>DISPOSICIONES FINALES</strong></p>
-    <p>
-      El perdón no es obligatorio.<br>
-      El tiempo no se reclama.<br>
-      La sinceridad es permanente.
-    </p>
+    <textarea id="finales" rows="3"
+      placeholder="Condiciones finales..."></textarea>
 
     <div class="firmas">
-      <div class="firma">
-        <p><strong>Firma Parte A</strong></p>
-        <div class="linea"></div>
-        <p>Nombre:</p>
-      </div>
+      <p><strong>Firma Parte A</strong></p>
+      <input type="text" id="firmaA" placeholder="Nombre Parte A">
+      <div class="linea"></div>
 
-      <div class="firma">
-        <p><strong>Firma Parte B (opcional)</strong></p>
-        <div class="linea"></div>
-        <p>Nombre:</p>
-      </div>
+      <p><strong>Firma Parte B (opcional)</strong></p>
+      <input type="text" id="firmaB" placeholder="Nombre Parte B">
+      <div class="linea"></div>
     </div>
 
     <div class="nota">
       Este contrato entra en vigor desde el momento en que se lee con el corazón abierto.
     </div>
   </div>
+
+  <script>
+    const clausulasDiv = document.getElementById("clausulas");
+
+    function guardar() {
+      const data = {
+        fecha: fecha.value,
+        antecedentes: antecedentes.value,
+        finales: finales.value,
+        firmaA: firmaA.value,
+        firmaB: firmaB.value,
+        clausulas: [...document.querySelectorAll(".clausula textarea")].map(t => t.value)
+      };
+      localStorage.setItem("contratoRedencion", JSON.stringify(data));
+    }
+
+    function cargar() {
+      const data = JSON.parse(localStorage.getItem("contratoRedencion"));
+      if (!data) return;
+
+      fecha.value = data.fecha || "";
+      antecedentes.value = data.antecedentes || "";
+      finales.value = data.finales || "";
+      firmaA.value = data.firmaA || "";
+      firmaB.value = data.firmaB || "";
+
+      data.clausulas.forEach(texto => {
+        agregarClausula(texto);
+      });
+    }
+
+    function agregarClausula(texto = "") {
+      const div = document.createElement("div");
+      div.className = "clausula";
+      div.innerHTML = `
+        <textarea rows="2" placeholder="Escribe una cláusula...">${texto}</textarea>
+      `;
+      clausulasDiv.appendChild(div);
+      div.querySelector("textarea").addEventListener("input", guardar);
+      guardar();
+    }
+
+    document.querySelectorAll("input, textarea").forEach(el => {
+      el.addEventListener("input", guardar);
+    });
+
+    cargar();
+  </script>
 
 </body>
 </html>
