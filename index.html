@@ -7,8 +7,8 @@
 
   <style>
     body {
-      font-family: Arial, sans-serif;
-      background: #f4f6f8;
+      font-family: "Segoe UI", Arial, sans-serif;
+      background: linear-gradient(180deg, #f4f6f8, #e9edf2);
       margin: 0;
       padding: 20px;
       color: #2c3e50;
@@ -16,16 +16,16 @@
 
     .contrato {
       background: white;
-      max-width: 700px;
+      max-width: 720px;
       margin: auto;
-      padding: 30px 25px;
-      border-radius: 16px;
-      box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+      padding: 35px 28px;
+      border-radius: 20px;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.15);
     }
 
     h1 {
       text-align: center;
-      margin-bottom: 10px;
+      margin-bottom: 5px;
     }
 
     .subtitulo {
@@ -36,17 +36,28 @@
     }
 
     p {
-      line-height: 1.6;
+      line-height: 1.7;
       margin-bottom: 15px;
+    }
+
+    hr {
+      border: none;
+      border-top: 1px solid #e0e0e0;
+      margin: 30px 0;
     }
 
     textarea, input {
       width: 100%;
-      padding: 10px;
-      border-radius: 8px;
-      border: 1px solid #ccc;
+      padding: 12px;
+      border-radius: 12px;
+      border: 1px solid #d0d7de;
       font-size: 14px;
-      margin-top: 5px;
+      margin-top: 6px;
+      box-sizing: border-box;
+    }
+
+    textarea {
+      resize: vertical;
     }
 
     .clausula {
@@ -57,24 +68,47 @@
       background: #2c3e50;
       color: white;
       border: none;
-      padding: 10px 15px;
-      border-radius: 8px;
+      padding: 12px 18px;
+      border-radius: 12px;
       cursor: pointer;
       margin-top: 10px;
+      font-size: 14px;
+    }
+
+    button:hover {
+      background: #1f2d3a;
+    }
+
+    .ayuda {
+      background: #f7f9fb;
+      border-left: 4px solid #2c3e50;
+      padding: 15px;
+      border-radius: 12px;
+      margin-bottom: 20px;
+      font-size: 14px;
+      color: #34495e;
+    }
+
+    .ayuda ul {
+      margin: 10px 0 0 18px;
+    }
+
+    .ayuda li {
+      margin-bottom: 6px;
     }
 
     .firmas {
-      margin-top: 40px;
+      margin-top: 45px;
     }
 
     .linea {
       border-bottom: 1px solid #2c3e50;
-      margin-top: 25px;
+      margin: 25px 0;
     }
 
     .nota {
-      margin-top: 25px;
-      font-size: 14px;
+      margin-top: 30px;
+      font-size: 13px;
       color: #7f8c8d;
       text-align: center;
     }
@@ -83,8 +117,8 @@
 <body>
 
   <div class="contrato">
-    <h1>📄 CONTRATO DE REDENCIÓN EMOCIONAL</h1>
-    <div class="subtitulo">Documento no legal, pero emocionalmente vinculante</div>
+    <h1>📄 Contrato de Redención Emocional</h1>
+    <div class="subtitulo">Documento no legal, pero emocionalmente sincero</div>
 
     <p><strong>Entre:</strong></p>
     <p>
@@ -106,17 +140,38 @@
     </p>
     <p>
       La Parte B podrá establecer las cláusulas que considere necesarias como condición
-      para evaluar la posibilidad del perdón.
+      para evaluar el perdón.
     </p>
 
-    <p><strong>CLÁUSULAS (añade las que quieras)</strong></p>
+    <hr>
+
+    <p><strong>CLÁUSULAS</strong></p>
+
+    <!-- Ayuda / explicación -->
+    <div class="ayuda">
+      <strong>¿Qué escribir en las cláusulas?</strong>
+      <p>
+        Las cláusulas no son castigos. Son acuerdos claros para que la persona A cumpla y evitar
+        que el error vuelva a repetirse.
+      </p>
+      <p><strong>Ejemplos de texto:</strong></p>
+      <ul>
+        <li>“La Parte A se compromete a comunicar lo que siente antes de guardar silencio.”</li>
+        <li>“La Parte A respetará el espacio emocional cuando la Parte B lo necesite.”</li>
+      </ul>
+    </div>
+
     <div id="clausulas"></div>
 
     <button onclick="agregarClausula()">➕ Añadir cláusula</button>
 
+    <hr>
+
     <p><strong>DISPOSICIONES FINALES</strong></p>
     <p>
-     Persona A aprovecha dicho contrato para reafirmar el amor que siente por la persona B y sus ganas de hacerla feliz
+      La Parte A aprovecha este contrato para reafirmar el amor que siente por la Parte B,
+      su deseo sincero de hacerla feliz y su disposición a demostrarlo con hechos,
+      paciencia y respeto.
     </p>
 
     <div class="firmas">
@@ -130,7 +185,7 @@
     </div>
 
     <div class="nota">
-      Este contrato entra en vigor desde el momento en que se lee con el corazón abierto.
+      Este contrato entra en vigor desde el momento en que se lee con honestidad y el corazón abierto.
     </div>
   </div>
 
@@ -162,7 +217,7 @@
       const div = document.createElement("div");
       div.className = "clausula";
       div.innerHTML = `
-        <textarea rows="2" placeholder="Escribe una cláusula...">${texto}</textarea>
+        <textarea rows="2" placeholder="Ejemplo: La Parte A se compromete a...">${texto}</textarea>
       `;
       clausulasDiv.appendChild(div);
       div.querySelector("textarea").addEventListener("input", guardar);
