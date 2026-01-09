@@ -5,6 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Contrato de Redención Emocional</title>
 
+  <!-- jsPDF -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
   <style>
     body {
       font-family: "Segoe UI", Arial, sans-serif;
@@ -68,11 +71,12 @@
       background: #2c3e50;
       color: white;
       border: none;
-      padding: 12px 18px;
+      padding: 14px 18px;
       border-radius: 12px;
       cursor: pointer;
-      margin-top: 10px;
+      margin-top: 12px;
       font-size: 14px;
+      width: 100%;
     }
 
     button:hover {
@@ -116,7 +120,7 @@
 </head>
 <body>
 
-  <div class="contrato">
+  <div class="contrato" id="contenido">
     <h1>📄 Contrato de Redención Emocional</h1>
     <div class="subtitulo">Documento no legal, pero emocionalmente sincero</div>
 
@@ -147,14 +151,11 @@
 
     <p><strong>CLÁUSULAS</strong></p>
 
-    <!-- Ayuda / explicación -->
     <div class="ayuda">
       <strong>¿Qué escribir en las cláusulas?</strong>
       <p>
-        Las cláusulas no son castigos. Son acuerdos claros para que la persona A cumpla y evitar
-        que el error vuelva a repetirse.
+        Las cláusulas no son castigos. Son acuerdos claros para evitar que el error se repita.
       </p>
-      <p><strong>Ejemplos de texto:</strong></p>
       <ul>
         <li>“La Parte A se compromete a comunicar lo que siente antes de guardar silencio.”</li>
         <li>“La Parte A respetará el espacio emocional cuando la Parte B lo necesite.”</li>
@@ -169,24 +170,25 @@
 
     <p><strong>DISPOSICIONES FINALES</strong></p>
     <p>
-      La Parte A aprovecha este contrato para reafirmar el amor que siente por la Parte B,
-      su deseo sincero de hacerla feliz y su disposición a demostrarlo con hechos,
-      paciencia y respeto.
+      La Parte A reafirma su compromiso de demostrar con hechos, paciencia y respeto.
     </p>
 
     <div class="firmas">
       <p><strong>Firma Parte A</strong></p>
-      <input type="text" id="firmaA" placeholder="Nombre Parte A">
+      <input type="text" id="firmaA">
       <div class="linea"></div>
 
       <p><strong>Firma Parte B</strong></p>
-      <input type="text" id="firmaB" placeholder="Nombre Parte B">
+      <input type="text" id="firmaB">
       <div class="linea"></div>
     </div>
 
     <div class="nota">
-      Este contrato entra en vigor desde el momento en que se lee con honestidad y el corazón abierto.
+      Este contrato entra en vigor desde el momento en que se lee con honestidad.
     </div>
+
+    <!-- BOTÓN PDF -->
+    <button onclick="guardarPDF()">📥 Guardar contrato en PDF</button>
   </div>
 
   <script>
@@ -209,16 +211,13 @@
       fecha.value = data.fecha || "";
       firmaA.value = data.firmaA || "";
       firmaB.value = data.firmaB || "";
-
       data.clausulas.forEach(texto => agregarClausula(texto));
     }
 
     function agregarClausula(texto = "") {
       const div = document.createElement("div");
       div.className = "clausula";
-      div.innerHTML = `
-        <textarea rows="2" placeholder="Ejemplo: La Parte A se compromete a...">${texto}</textarea>
-      `;
+      div.innerHTML = `<textarea rows="2">${texto}</textarea>`;
       clausulasDiv.appendChild(div);
       div.querySelector("textarea").addEventListener("input", guardar);
       guardar();
@@ -227,6 +226,21 @@
     document.querySelectorAll("input").forEach(el => {
       el.addEventListener("input", guardar);
     });
+
+    function guardarPDF() {
+      const { jsPDF } = window.jspdf;
+      const pdf = new jsPDF("p", "mm", "a4");
+
+      pdf.html(document.getElementById("contenido"), {
+        x: 10,
+        y: 10,
+        width: 190,
+        windowWidth: 800,
+        callback: function (doc) {
+          doc.save("Contrato_Redencion_Emocional.pdf");
+        }
+      });
+    }
 
     cargar();
   </script>
